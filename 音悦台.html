@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>音悦台</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="css/yinyuetai.css">
+    <script>
+        /*
+         像素比2，意思就是在手机上以1个像素显示2个像素的东西，所以比如320宽度的元素，在IPHONE4下只显示一半的屏幕.
+         所以目前设计图尺寸最好用750或者以上的，否则会发虚
+
+         */
+        //横竖屏适配
+        //window.addEventListener('orientationchange', setSize);
+        window.addEventListener('resize', setSize);
+        setSize();
+        function setSize() {
+            var html = document.querySelector('html');
+            var width = html.getBoundingClientRect().width;
+            //html的字体大小等于屏幕宽度的1/16,也就是1rem=width/16+'px';例如当屏幕宽度为320的时候，320/16=20px,1rem就是等于20px
+            //那么设计图上宽度为120的元素，写成rem就是6rem;
+            html.style.fontSize = width / 16 + 'px';
+        }
+    </script>
+    <!--
+    方案2:通过动态设置viewport(可视区)的宽度把宽度定死320
+    var html = document.querySelector('html');
+    var width = window.screen.width;
+    var targetW=320;
+    var scale=980/targetW;
+    var meta=document.createElement('meta');
+    meta.setAttribute('name','viewport');
+    meta.setAttribute('content',"width=device-width,initial-scale="+scale+",minimum-scale="+scale+",maximum-scale="+scale+",user-scalable=no,");
+    document.head.appendChild(meta);
+    -->
+
+</head>
+<body>
+<section class="wrap">
+    <header id="header">
+        <div class="headerC">
+            <h1 id="logo">
+                <a href=""><img src="img/logo.png" alt=""></a>
+            </h1>
+            <a href="javascript:;" id="menuBtn" class="menuBtnShow"></a>
+            <nav id="btns">
+                <a href="#" class="searchBtn">搜索</a>
+                <a href="#">登录</a>
+                <a href="#">注册</a>
+            </nav>
+        </div>
+        <div class="channel_panel">
+            <div class="channel_panel_wrapper">
+                <ul>
+                    <li><a href="">首页</a></li>
+                    <li><a href="">MV</a></li>
+                    <li><a href="">悦单</a></li>
+                    <li><a href="">悦单</a></li>
+                    <li><a href="">音乐</a></li>
+                    <li><a href="">音乐</a></li>
+                    <li><a href="">音乐</a></li>
+                    <li><a href="">饭团</a></li>
+                    <li><a href="">资讯</a></li>
+                    <li><a href="">我的家</a></li>
+                    <li><a href="">APP下载</a></li>
+                    <li><a href="">热门应用</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+</section>
+<script>
+    window.onload=function () {
+        document.addEventListener('touchstart',function () {
+
+        })
+        navShow();
+        function navShow() {
+            var btn = document.querySelector('#menuBtn');
+            var nav = document.querySelector('#nav');
+            btn.addEventListener(
+                    'touchstart',
+                    function (e) {
+                        if(this.className=="menuBtnShow"){
+                            this.className='menuBtnClose';
+                        }else{
+                            this.className='menuBtnShow';
+                        }
+                        e.stopPropagation();
+                    })
+        }
+    }
+
+</script>
+</body>
+</html>

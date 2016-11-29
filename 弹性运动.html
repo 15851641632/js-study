@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 100px;
+        }
+
+        #line {
+            width: 1px;
+            height: 500px;
+            background-color: black;
+            position: absolute;
+            left: 500px;
+        }
+        ul{
+            position: relative;
+            /*border: 1px solid black;*/
+            overflow: hidden;
+            width:428px;
+        }
+        li{
+            list-style: none;
+            width: 100px;
+            height:30px;
+            line-height:30px;
+            background-color: red;
+            color: white;
+            float: left;
+            margin-right: 5px;
+            text-align: center;
+        }
+        #mark{
+            position: absolute;
+            height:30px;
+            line-height:30px;
+            /*width: 100px;*/
+            left:0;
+            top:0;
+            overflow: hidden;
+        }
+        ul #mark #cmark{
+            position: absolute;
+            left:-1px;
+            top:-1px;
+            width:428px;
+            /*overflow: hidden;*/
+
+        }
+        #cmark li{
+            color: #000000;
+            background-color: rgba(0,0,0,0.3);
+        }
+        /*#mark ul li{*/
+            /*float: left;*/
+            /*color: black;*/
+            /*!*background: yellow;*!*/
+        /*}*/
+    </style>
+</head>
+<body>
+<script>
+    //    区别:
+    //    1、弹性运动:
+    //    速度+=(目标点-当前值)/系数
+    //    速度*摩擦系数
+    //    2、缓冲运动:
+    //    速度=(目标点-当前值)/系数
+    //    速度取证
+    window.onload = function () {
+        var oBtn = document.getElementById('btn');
+        var box = document.getElementById('box');
+        var line = document.getElementById('line');
+        var timer = null;
+        var timerout=null;
+        var speed = 0;
+        var oli=document.getElementsByClassName('item');
+        var omark=document.getElementById('mark');
+        var cmark=document.getElementById('cmark');
+        for(var i=0;i<oli.length;i++){
+            oli[i].onmouseover=function () {
+                clearTimeout(timerout);
+               startMove(this.offsetLeft);
+            }
+            oli[i].onmouseout=function () {
+                timerout=setTimeout(function () {
+                    startMove(0);
+                },100)
+
+            }
+        }
+        omark.onmouseover=function () {
+            clearTimeout(timerout);
+        }
+        omark.onmouseout=function () {
+            timerout=setTimeout(function () {
+                startMove(0);
+            },100)
+        }
+//        oBtn.onclick = function () {
+//            clearInterval(timer);
+//            timer = setInterval(startMove, 30)
+//        }
+        function startMove(target) {
+            clearInterval(timer);
+            timer=setInterval(function () {
+                speed += (target - omark.offsetLeft) / 6;
+                speed *= 0.75;
+                if (Math.abs(speed) <= 1 && Math.abs((target - omark.offsetLeft)) <= 1) {
+                    clearInterval(timer);
+                    omark.style.left=target+'px';
+                    cmark.style.left=-target+'px';
+                    speed=0;
+                } else {
+                    omark.style.left = omark.offsetLeft + speed + 'px';
+                    cmark.style.left = -omark.offsetLeft + speed + 'px';
+                }
+                //document.title = omark.offsetLeft + '::' + speed;
+            },30)
+
+        }
+
+    }
+</script>
+<div id="box"></div>
+<div id="line"></div>
+<input type="button" value="开始" id="btn">
+
+<ul>
+    <li id="mark">
+        <ul id="cmark">
+            <li>首页</li>
+            <li>视频</li>
+            <li>留言</li>
+            <li>地址</li>
+        </ul>
+    </li>
+    <li class="item">首页</li>
+    <li class="item">视频</li>
+    <li class="item">留言</li>
+    <li class="item">地址</li>
+</ul>
+
+
+</body>
+</html>

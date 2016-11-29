@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table id="tab" style="position: absolute;left: 400px;">
+    <thead>
+    <th>姓名</th>
+    <th>年龄</th>
+    <th>成绩</th>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<script>
+    //表格排序:
+    //tBodies：获取表格中所有的tbody
+    //tHead:获取表格中唯一一个thead
+    //tBody.rows:获取tbody下所有tr
+    //tHead.rows[0].cells:获取thead下第一行中的所有列
+    var oTab = document.getElementById('tab')
+    var oHead = oTab.tHead;
+    var tBody = oTab.tBodies[0];
+    var oRows = tBody.rows;
+    var oThs = tHead.rows[0].cells;
+</script>
+</body>
+</html>

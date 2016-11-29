@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //var pat=new RegExp('abc');
+    //正则下的方法有:
+    //正则.test(str)//判断是否还有正则中的字符串,
+    //正则.exec(str);返回正则匹配的内容,找不到返回null
+    //字符串正则:
+    //search:console.log(str.search(pat));//能匹配到正则中的内容返回索引位置(从0开始的),所以不能直接放if条件里面，应为0代表false，没有就返回-1
+    //match:console.log(str.match(pat));//返回正则表达式中匹配的内容
+    //replace:console.log(str.replace(pat,'哈哈哈'));//返回正则表达式中的内容替换之后的字符串
+    //split:
+    //匹配到[任意一个就可以][0-9][a-z][A-Z]
+//    var pat = /[xx]/g;
+//    var pat=/hell|b/g;
+    //n+,匹配n至少1次
+    //n* 匹配任意次，0次也可以
+    //n?匹配尽可能的少，非贪婪模式,匹配到一个就匹配下一个,比如匹配ab*,即使是abbbb,也只匹配到ab就结束，否则的话，正则天生的贪婪模式，会匹配到abbbb
+    //{3,4}匹配3-4个长度
+    //\s空字符，tab 空格 换行那些
+    //\w匹配，字母数字下划线，就是单词word
+    var pat=/^\w{6,10}$/ig;
+    var str = 'wesdsdwww!!';
+    console.log(str.match(pat));//返回正则表达式中匹配的内容
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li {
+            width: 20px;
+            height: 30px;
+            background-color: red;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul"><!--这是一个注释-->
+    <li><a href="#">11</a></li>
+    <li><a href="#">22</a></li>
+    <li><a href="#">33</a></li>
+</ul>
+<!--在IE6，7中会把表单元素input的name值当做ID来用，-->
+<!--在IE6，7中不区分ID大小写-->
+<!--项目实战注意：不要把表单元素的name值和其他元素的ID重复，并且不要用ID的大小写来区分不同元素-->
+<!--如果没有获取到返回null-->
+<!--我们可以直接用元素的ID来代表当前这个元素  不推荐-->
+<script>
+    //    document.documentElement获取html元素
+    //    document.body获取body元素
+    window.onload = function () {
+        var odiv = document.getElementById('aa');
+        var oul = document.getElementById('ul');
+        var all_oli = oul.childNodes;//所有节点
+        var ele_lis=oul.children;//元素节点
+        odiv.style.cssText = "width:200px;height:200px;background:red";
+        //1--代表元素节点(标签)
+        //9--代表document
+        //3--代表文本节点，文字、换行、
+        //8--注释节点
+        //2--属性节点
+        //childNodes所有的子元素节点，包括文本节点,是一个类数组
+        //nodeValue:查看节点的属性值
+        //console.log(document.nodeType);
+        //console.log(oul.childNodes[0].nodeType);
+        //        console.log(oul.childNodes[0].nodeValue);
+        //        console.log(oli.childNodes)
+        //        var lis=oul.childNodes;
+        //        var lis=oul.children;//常用，这个属性是获取的就是元素节点，不获取别的节点
+        //        console.log(lis.length);
+        //        document.onclick=function () {
+        //            for(var i=0;i<lis.length;i++){
+        //                if(lis[i].nodeType===1){
+        //                    lis[i].style.width='150px';
+        //                }
+        //
+        //            }
+        //        }
+
+        /*
+        parentNode:查找某个元素的父节点
+         */
+//            console.log(ele_lis[0].parentNode);
+//            var oas=document.getElementsByTagName('a');
+//            for(var i=0;i<oas.length;i++){
+//                oas[i].onclick=function () {
+//                    console.log(this);
+//                    //this.parentNode.style.display='none';
+//                }
+//            }
+
+        /*
+         nextElementSibling:下一个兄弟元素
+         previousElementSibling:上一个兄弟节点
+         firstElementChild:第一个子节点
+         lastElementChild:最后一个子节点
+         如果找到尽头没有了，就输出null
+         */
+        //console.log(oul.firstElementChild);
+
+        /*
+        offsetLeft:距离定位父级的距离,左边界到父级的左边界
+        offsetParent:最近的具有定位属性的祖先节点,没有定位的话，就是走向body
+         */
+
+
+    }
+</script>
+<div id="aa">123</div>
+</body>
+</html>

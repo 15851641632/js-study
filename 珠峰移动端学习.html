@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .aa {
+        /*是根元素字体大小的10倍*/
+        background-color: deepskyblue;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-end;
+    }
+
+    ul li {
+        list-style: none;
+        padding:0 20px;
+        line-height:50px;
+    }
+
+    @media all and (max-width: 800px) {
+        .aa {
+            justify-content: center;
+        }
+
+    }
+    @media all and (max-width: 600px) {
+        .aa {
+            flex-flow:column wrap;
+            /*align-content: flex-start;*/
+        }
+         ul li{
+             border-top:1px solid rgba(200,255,255,0.3);
+             border-bottom: 1px solid rgba(0,0,0,1);
+         }
+    }
+</style>
+<body>
+<!--pc页面在终端设备打开的时候，会以默认的最小缩放模式打开，目的就是为了防止出现滚动条，
+缩放比例就是==设备宽度/980,980是HTML的默认宽度，-->
+<!--移动设备实际上是有两个宽度的，一个是虚拟的html宽度，虽然看不见，但确是真实存在的，一般都是980,第二个就是设备的宽度,-->
+<!--所以当不设置视口的时候，直接在html写东西，设备屏幕会显示不下，会导致出现滚动条，只有设备两个视口一样大，才能正好的显示-->
+
+<!--屏幕宽度和分辨率之间的换算关系:屏幕分辨率=屏幕宽度*设备像素比,例如iphone5, 320*568, DPR为2,  所以屏幕分辨率为640*1136-->
+<!--css像素:单位PX，-->
+
+<!--设备像素比(DPR):css像素/屏幕宽度-->
+<!--background-size:contain,按照原始比例进行缩放，缺点是可能由于原始比例过大或者过小，导致屏幕显示不下，或者填不满屏幕。
+background-size:cover
+-->
+<ul class="aa">
+    <li>天猫</li>
+    <li>聚划算</li>
+    <li>淘点点</li>
+    <li>讨生活</li>
+    <li>爽111</li>
+</ul>
+<script>
+
+</script>
+</body>
+</html>

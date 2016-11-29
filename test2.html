@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">-->
+    <script>
+        //获取像素比
+        <!--像素比解释  1px 在像素比为2的屏幕上，显示为2px,以2px来显示1px的东西，所以会更清晰，但是元素会变大-->
+        <!--如何让1px显示1px的东西-->
+        <!--1.1像素还原，尽可能和设备分辨率一致-->
+        <!--屏幕越大，字体尺寸越大，反之则反之-->
+        //                1rem就是当前html的fontSize的大小
+        var pixelRatio = window.devicePixelRatio;
+        var scale = 1 / pixelRatio;
+        document.write('<meta name="viewport" content="width=device-width,initial-scale=' + scale + ',minimum-scale=' + scale + ',maximum-scale=' + scale + ',user-scalable=no">');
+        var html = document.getElementsByTagName('html')[0];
+        var pageWidth = html.getBoundingClientRect().width;
+        html.style.fontSize = pageWidth / 16 + 'px';
+    </script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .head_box {
+            width: 100%;
+            height: 179px;
+            background-color: #ef3239;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .list {
+            margin-top: 179px;
+        }
+
+        .list .item {
+            float: left;
+            box-sizing: border-box;
+            height: 350px;
+            border-bottom: 1px solid black;
+        }
+    </style>
+
+</head>
+<body>
+<header class="head_box">
+    <div class="head_top"></div>
+    <div class="head_bottom"></div>
+</header>
+<ul class="list">
+    <li class="item">11111</li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="hhttp://img1.imgtn.bdimg.com/it/u=4074790646,1024085721&fm=15&gp=0.jpg" alt="">
+<script>
+    window.onload = function () {
+        var oimg = new Image();
+        var img_address = [
+            'http://img1.imgtn.bdimg.com/it/u=4074790646,1024085721&fm=15&gp=0.jpg',
+            'http://www.ffnmw.cc/imgall/o53xolt2njtxg6lmmyxgg33n/uploadfile/2013/1016/20131016090905212.jpg',
+            'http://img3.imgtn.bdimg.com/it/u=3271128072,3807413791&fm=21&gp=0.jpg',
+            'http://www.xcb.gov.cn/newsdata/20111222/5975481.jpg',
+            'http://www.zjgyouth.net/zjgyouth/UploadFile/upfilepic/635199591477197955.jpg',
+            'http://www.ffnmw.cc/imgall/o53xolt2njtxg6lmmyxgg33n/uploadfile/2013/1016/20131016090735356.jpg',
+            'http://img4.imgtn.bdimg.com/it/u=2468481397,2202338263&fm=21&gp=0.jpg'
+        ]
+        var icur=0;
+        xunlei();
+        function xunlei() {
+            oimg.src=img_address[icur];
+            oimg.onload=function () {
+                icur++;
+                console.log(111111);
+                if(icur<img_address.length){
+                    xunlei();
+                }
+                document.title=icur+'/'+img_address.length;
+            }
+        }
+        
+        
+    }
+</script>
+</body>
+</html>

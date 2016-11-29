@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+        }
+        #box{
+            width:30px;
+            height:30px;
+            background-color: red;
+            position: absolute;
+            left:100px;
+            top:500px;
+        }
+    </style>
+</head>
+<body>
+<!--<input type="button" value="点击开始" id="btn">-->
+<div id="box"></div>
+<script>
+    window.onload = function () {
+        var box=document.getElementById('box');
+        var btn=document.getElementById('btn');
+        var speed=-40;
+        var speedx=10;
+        var timer=null;
+        box.onclick=function () {
+            clearInterval(timer);
+            timer=setInterval(function () {
+                speed+=3;
+                var t=box.offsetTop+speed;
+                if(t>document.documentElement.clientHeight-box.offsetHeight){
+                    t=document.documentElement.clientHeight-box.offsetHeight;
+                    speed*=-1;
+                    speed*=0.75;
+                    speedx*=0.75;
+                }
+                if(speedx<1 && speed<1){
+                    clearInterval(timer);
+//                    speed=-40;
+//                    speedx=10;
+                }
+
+                box.style.top=t+'px';
+                box.style.left=box.offsetLeft+speedx+'px';
+            },30)
+
+        }
+    }
+</script>
+</body>
+</html>

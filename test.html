@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+     2016-11-11,晚8：:30，若愚老师对于原型链和对象的讲解
+     */
+
+    /*
+     1、函数也是一个特殊的对象，一般来说产生对象都是以这张形式产生:var obj=new Constructor();
+     但是Student这个函数是谁new出来的呢??可以通过console.log(student.constructor)来查看产生这个对象的构造函数是谁。
+     2、应为函数也是一个特殊的对象，所以它也可以带有属性，所以每个函数都自带prototype属性（原型）
+     3、当new一个构造函数产生一个对象的时候(var s1=new Student()),这个对象带有__proto__属性，这个属性是链接到函数原型对象的通道(纽带)
+     可以通过打印(s1.__proto__===student.prototype)来验证
+
+     */
+    function Student(name, age) {
+        this.name = name;
+        this.age = age;
+
+    }
+    /*
+     将方法定义到原型上，用对象去访问，首先搜索自身是否有这个方法(如果找到就终止搜索)，没找到的话，就继续往函数的原型上搜索，还是没有的话，就
+     找到函数原型的原型上，就是Object上，还是找不到就输出undefined
+     */
+    Student.prototype.sayname = function () {
+        console.log(this.name);
+    }
+    var s1 = new Student('zhang', 22);
+    s1.sayname();
+
+
+</script>
+</body>
+</html>

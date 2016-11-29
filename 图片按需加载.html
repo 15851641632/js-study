@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+
+    /*
+     滚动加载的的时候必须使用这个方法来获取元素到页面顶部的距离
+     否则，当元素外面有别的元素包裹并且父级元素有定位属性的时候，就无法准确获取了。。。
+     */
+    function getTop(obj) {
+        var itop = 0;
+        while (obj) {
+            itop += itop.offsetTop;
+            obj = obj.offsetParent;
+        }
+        return itop;
+    }
+</script>
+</body>
+</html>

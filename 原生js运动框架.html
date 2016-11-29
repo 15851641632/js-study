@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="tool.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #div1 {
+            width: 100px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            top: 100px;
+            left: -100px;
+        }
+
+        #div2 {
+            width: 30px;
+            height: 60px;
+            background-color: black;
+            position: absolute;
+            right: -30px;
+            top: 70px;
+            color: white;
+            text-align: center;
+        }
+
+        #img {
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+        }
+
+        ul {
+            position: relative;
+            width: 330px;
+            /*top: 100px;*/
+            /*left: 200px;*/
+        }
+
+        .item {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background: red;
+            list-style: none;
+            margin: 10px 0 0 10px;
+        }
+
+        #area {
+            position: absolute;
+            left: 400px;
+        }
+
+        #send {
+            position: absolute;
+            left: 400px;
+            top: 180px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #content_load {
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+            position: absolute;
+            left: 400px;;
+            top: 200px;
+            overflow: auto;
+        }
+
+        #content_load li {
+            border-bottom: 1px dashed #000000;
+            word-break: break-all;
+            line-height: 28px;
+            overflow: hidden;
+        }
+
+        #GoTop {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        body {
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+<!--放大的照片-->
+<ul id="photos">
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+</ul>
+<!--放大的照片-->
+<!--弹性效果的留言本-->
+<textarea cols="50" rows="10" id="area"></textarea>
+<input type="button" value="发送" id="send">
+<ul id="content_load">
+    <!--<li></li>-->
+</ul>
+<!--弹性效果的留言本-->
+
+<div id="GoTop"></div>
+
+
+<script>
+    var odiv = document.getElementById('GoTop');
+    var otimer = null;
+    var scrollTop=0
+    function setTop() {
+        //var odiv=document.getElementById('GoTop');
+        scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        odiv.style.top = scrollTop + document.documentElement.clientHeight - odiv.offsetHeight + 2 + 'px';
+    }
+    window.onscroll = function () {
+        setTop();
+    }
+
+    odiv.onclick = function () {
+        clearInterval(otimer);
+        var icur = speed = 0;
+        otimer = setInterval(function () {
+            icur=document.documentElement.scrollTop || document.body.scrollTop;
+            speed=Math.floor((0-icur)/8);
+            if(icur==0){
+                clearInterval(otimer);
+            }else{
+                document.documentElement.scrollTop=document.body.scrollTop=icur+speed;
+            }
+        }, 30)
+    }
+
+    var div1 = document.getElementById('div1');
+    var div2 = document.getElementById('div2');
+    var img = document.getElementById('img');
+    var icur = 0;
+    var op = document.getElementById('photos');
+    var itmes = op.getElementsByTagName('li');
+    var arr = [];
+    var zindex = 0;
+    for (var i = 0; i < itmes.length; i++) {
+        arr.push({left: itmes[i].offsetLeft, top: itmes[i].offsetTop})
+    }
+    for (var i = 0; i < itmes.length; i++) {
+        itmes[i].index = i;
+        itmes[i].style.left = arr[i].left + 'px';
+        itmes[i].style.top = arr[i].top + 'px';
+        itmes[i].style.position = 'absolute';
+        itmes[i].style.margin = '0px';
+        itmes[i].style.zIndex = 0;
+        itmes[i].onmouseover = function () {
+            this.style.backgroundColor = 'green';
+            this.style.zIndex = ++zindex;
+            startMove(this, {
+                'width': 200,
+                'height': 200,
+                'left': arr[this.index].left - 50,
+                'top': arr[this.index].top - 50,
+            })
+
+        }
+        itmes[i].onmouseout = function () {
+            this.style.backgroundColor = 'red';
+            startMove(this, {
+                'width': 100,
+                'height': 100,
+                'left': arr[this.index].left,
+                'top': arr[this.index].top
+            })
+        }
+
+
+    }
+
+    var txt = document.getElementById('area');
+    var oBtn = document.getElementById('send');
+    var content_load = document.getElementById('content_load');
+    oBtn.onclick = function () {
+        var oli = document.createElement('li');
+        oli.innerHTML = txt.value;
+        if (content_load.children[0]) {
+            content_load.insertBefore(oli, content_load.children[0]);
+        } else {
+            content_load.appendChild(oli);
+        }
+        var iheight = parseInt(css(oli, 'height'));
+        console.log(iheight);
+
+        oli.style.height = '0px';
+        oli.style.opacity = '0';
+        oli.style.filter = 'alpha(opacity=0)';
+        startMove(oli, {
+            'height': iheight,
+            'opacity': 100
+        })
+
+    }
+
+
+    /*
+     缓冲运动:速度由距离决定
+     速度:(目标值-当前值)/系数(自己定)
+     bug:速度取整
+     值取整
+     */
+
+    /*
+     元素居中放大:除了要改变宽高之外，还要改变元素位移，如果元素放大一倍，那么位移是放大宽高的一半
+     元素必须是定位的
+     */
+
+    /*
+     用JS去设置CSS样式的时候，在统一代码块中优先级高于其他设置
+     */
+
+
+</script>
+</body>
+</html>

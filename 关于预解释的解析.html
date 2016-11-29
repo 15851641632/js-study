@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #aa {
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<!--预解释-->
+<!--浏览器解析Js的时候，在代码执行前，先找到所有带VAR和function的定义，找完之后在从上到下执行，让找到的值和变量发生关系-->
+<!--变量带var和不带的区别就是 ，带var可以进行预解释，不带不能预解释，这样会导致，如果在代码运行之前执行这个变量就会报错
+并且带var的预解释，只声明不定义（赋值）所以默认值为undefined
+-->
+<!--带function的预解释和var不同，在预解释的时候，连声明也一起做了，所以当代码执行前输出预解释结果的话，是函数本体-->
+<!--预解只发生在当前作用域,刚开始只预解释window作用域下的，当函数执行的时候，在执行函数私有域下的预解释-->
+<!--当var 的变量名和function的函数名相重时，function 的优先级比较高-->
+<!--函数表达式中，只预解释=号左边的，右边的不参与预解释-->
+<!--function中return 后面的值不参与预解释-->
+<!--一般情况下，一个function的生命周期-->
+<!--函数执行的时候形成一个私有作用域，保护内部的变量不受外部干扰（外部拿不到也修改不了），这种函数的机制叫做闭包-->
+<!--一个函数在执行的时候会形成一个私有作用域，如果没有返回一个function(也就是说外面没有其他东西占用着他的内存的话),这个作用域-->
+<!--执行完成之后，自动销毁，如果返回了一个function ,而且函数外面还用到这个function的话，那么这个function形成的作用域就销毁不掉了-->
+
+<!--this的知识要点-->
+<!--this是谁和在哪调用在哪执行没有任何关系，和函数执行时的主体有关系,而且this只出现在function中或全局作用域下-->
+
+
+<div id="aa">0</div>
+<script>
+    var number = 2;//预解释，解析到一个var number,var obj ,var fn1
+    //第二步，代码从上到下开始执行，全局number赋值为2
+    var obj = {//obj赋值为{}里面的东西，当赋值到fn1的时候，遇到了自执行的闭包函数
+        number: 4,
+        fn1: (function () {
+            //自执行闭包函数，重开预解释，解析到var number,
+            //开始执行，this.number,这里的this应为外部函数没有被别人调用，所以它是window,所以这个this.number其实指的是全局的number=>
+            //所以全局number变为4,第二个number,应为有预解释，所以它是一个私有变量但是应为还未赋值，所以他是undefined,在undefined的基础上进行
+            //乘法运算，最终输出NAN,
+            //var number=3,又将这个私有的number赋值为3
+            this.number *= 2;
+            number = number * 2;
+            console.log(number);
+            var number = 3;
+            return function () {
+
+                this.number *= 2;
+                number *= 3;
+                alert("ddd:" + number);
+            }
+        })()
+    };
+    //这一步，将fn1中的return的值赋给了fn1,
+    var fn1 = obj.fn1;
+    //这个number是全局的number为4
+    alert("aaa:" + number);
+    //执行return出来的function,又一次开启预解释环节，没有需要预解释的东西，开始执行代码
+    //this.number,应为这个function没有被他人调用，所以这个this指window,所以这个this,number指全局下的number,所以number变为8
+    //number*=3在这个作用域下，没有预解释到number变量，所以往外层的作用域找，找到了上一层的私有number 为3，所以这个number为9
+    //弹出9
+    fn1();
+    //这一步用obj调用fn1()带括号，实际上就是执行了fn1函数，所以obj.fn1()也就是执行return function那个函数,
+    //所以重新预解释了return function 的内部,
+    //this.number,this为obj,所以this.number为8
+    //第二个number为私有number,这个函数体内部没有预解释到number，往上一层找，找到了number=3,应为上一次执行的时候，已经变为9了，所以这里number为27
+    //所以最终,全局number变为4,8,私有number为9,27,console.log为NAN,obj内部的number为8
+    obj.fn1();
+    alert("bbb:" + window.number);//8
+    alert("ccc:" + obj.number);//8
+
+
+</script>
+</body>
+</html>

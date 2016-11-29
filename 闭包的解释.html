@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.js"></script>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+        }
+        html,body{
+            width:100%;
+            height:1000%;
+        }
+        .aa {
+            background-color: yellow;
+        }
+        .bb{
+            /*width: 200px;*/
+            height:200px;
+            border:1px solid black;
+            /*position: fixed;*/
+        }
+        .cc{
+            height:100px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<script>
+    //    下面的代码输出多少？修改代码让fnArr[i]() 输出 i。使用两种以上的方法
+    //    输出10
+    //    var fnArr = [];
+    //    for (var i = 0; i < 10; i++) {
+    //        fnArr[i] = function () {
+    //            return i;
+    //        };
+    //    }
+    //    console.log(fnArr[3]());  //
+
+    //这样写虽然的确是创建了10个不同作用域的闭包，但是应为闭包内找不到I变量，所以顺着作用域链往外找，还是找到了同一个I，所以最终输出还是
+    //一个10，并没有达到心里想要的值
+    //    var fnArr = [];
+    //    for (var i = 0; i < 10; i++) {
+    //        (function () {
+    //            fnArr[i] = function () {
+    //                return n;
+    //            };
+    //        })()
+    //    }
+    //console.log(fnArr[5]());  //
+
+
+    //所以要做的就是第一需要创建多个空间，第二需要在独立空间内能找到对应的保存的变量，而不需要往外找，这样就可以独立的输出自我
+    //    var fnArr = [];
+    //    for (var i = 0; i < 10; i++) {
+    //        (function (n) {
+    //            fnArr[n] = function () {
+    //                return n;
+    //            };
+    //        })(i)
+    //
+    //    }
+
+    $(function () {
+
+
+    })
+
+</script>
+
+<!--<ul>-->
+    <!--<li>11</li>-->
+    <!--<li>22</li>-->
+    <!--<li>33</li>-->
+<!--</ul>-->
+
+<div class="bb"></div>
+<div class="cc"></div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            font-size: 30px;
+            color: black;
+        }
+    </style>
+</head>
+<div id="box">扔我吧!!!</div>
+<body>
+<script>
+    window.onload = function () {
+        var box = document.getElementById('box');
+        var disx = 0;
+        var disy = 0;
+        var speedx = 0;
+        var speedy = 0;
+        var timer = null;
+        var prevx = 0;
+        var prevy = 0;
+        box.onmousedown = function (ev) {
+            var ev = ev || event;
+            disx = ev.clientX - box.offsetLeft;
+            disy = ev.clientY - box.offsetTop;
+            prevx = ev.clientX;
+            prevy = ev.clientY;
+            document.onmousemove = function (ev) {
+                var ev = ev || event;
+                box.style.left = ev.clientX - disx + 'px';
+                box.style.top = ev.clientY - disy + 'px';
+
+                speedx = ev.clientX - prevx;
+                speedy = ev.clientY - prevy;
+
+                prevx = ev.clientX;
+                prevy = ev.clientY;
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+                startMove();
+            }
+            return false;
+        }
+
+        function startMove() {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                speedy+=3;
+                var L = box.offsetLeft + speedx;
+                var T = box.offsetTop + speedy;
+
+                if(T>document.documentElement.clientHeight-box.offsetHeight){
+                    T=document.documentElement.clientHeight-box.offsetHeight;
+                    speedy*=-1;
+                    speedy*=0.75;
+                    speedx*=0.75;
+                }else if(T<0){
+                    T=0;
+                    speedy*=-1;
+                    speedy*=0.75;
+                }
+                if(L>document.documentElement.clientWidth-box.offsetWidth){
+                    L=document.documentElement.clientWidth-box.offsetWidth;
+                    speedx*=-1;
+                    speedx*=0.75;
+                }else if(L<0){
+                    L=0;
+                    speedx*=-1;
+                    speedx*=0.75;
+                }
+                box.style.left = L+ 'px';
+                box.style.top = T+ 'px';
+            }, 30)
+        }
+
+    }
+</script>
+</body>
+</html>

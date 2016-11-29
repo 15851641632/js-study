@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--postMessage
+第一个参数：发送的数据，
+第二个参数：接收的域(带上协议)-->
+<h1>我是www.a.com</h1>
+<input type="button" value="点我改变b.com背景色" id="btn">
+<iframe src="http://www.b.com/b/kuayu2.html" id="ff" frameborder="0" style="border: 1px solid black"></iframe>
+<script>
+    window.onload=function () {
+        var obtn=document.getElementById('btn');
+        var of=document.getElementById('ff');
+        obtn.addEventListener('click',function () {
+            of.contentWindow.postMessage('改变颜色','http://www.b.com');
+        })
+        //
+    }
+</script>
+</body>
+</html>

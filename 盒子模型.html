@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        p::before {
+            content: '我是为元素';
+            background: greenyellow;
+            color: red;
+        }
+
+        p::after {
+            content: '我在后面负责首尾';
+            background: blue;
+            color: #000;
+        }
+
+        p {
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+<p>顶顶顶顶顶大大大</p>
+<div id="aa"
+     style="width: 200px;height: 200px;border:10px solid black;position: absolute;top: 100px;left: 300px;"></div>
+<script>
+    //clientWidth======offsetWidth,只有在加border之后，两个值会不同，其他无论加padding、还是margin,获取的值都相同
+    //console.log(aa.clientWidth + "---------" + aa.offsetWidth);
+    //通过动态计算获取css样式
+    //1.getComputedStyle(ele,null).width ----支持标准浏览器(IE6,7,8不支持),把这个盒子在浏览器中显示的样式计算出来，即使是没有赋值的，只要有样式就能显示
+    //                   第一个参数:需要计算的页面元素，
+    //                   第二个参数：可选，计算指定的伪类（伪元素）的样式对象,他返回的是一个对象，这个对象包含了当前浏览器支持的所有的CSS属性
+    //使用规则:
+    //var obj=getComputedStyle(aa,null);
+    // console.log(obj.width);
+
+    //var ele=document.getElementsByTagName('p')[0];
+    //var con=getComputedStyle(ele,'before').content;
+    //    IE(6,7,8...10都支持)下：
+    //    var obj=ele.currentStyle.width;在IE下获得CSS样式属性集合
+    //所以兼容写法如下:
+    function getStyle(ele, attr) {
+        return window.getComputedStyle ? getComputedStyle(ele, null)[attr] : ele.currentStyle[attr];
+    }
+    //tips:在JS中，一个未定义的变量，只能做写操作，不能做读操作，但是可以用typeof(运算符)去运算
+    //比如一个a 变量，未用var声明，但是给他赋值确可以，直接输出就不行
+    //所以如果window.getComputedStyle把windwo.省略掉，在不支持getComputedStyle的浏览器下，就会报错
+    //所以也可以这样判断:if(typeof getComputedStyle=='function')
+    //alert(window.abb)//不报错，输出undefined,应为abb是属性，属性未定义，可以做读的操作
+    //alert(abb);//报错，应为abb是变量，变量未定义，不能做读的操作
+    //tips:1、getComputedStyle(ele,null)[attr]和2、getComputedStyle(ele,null).attr的区别就是，1号写法是动态写法，如果attr传入的并不是一些
+    //固有的CSS属性，那也可以通用，2号写法就是固定写法，传入的必须是有意义的属性
+
+
+    //默认情况下，所有的盒子产生的偏移都相对于文档(document.documentElement),document.body是文档的代理人.但是如果加了定位的话，就参照定位的属性来了
+    //偏移量的三个属性:offsetLeft(左偏移量) offsetTop(上偏移量) offsetParent(产生偏移的参照物)
+
+    //第二个问题什么时候偏移量参照物会发生变化：当layout发生变化的时候，offsetParent也会变化
+    function getOffset(ele) {
+        var l = ele.offsetLeft;
+        var t = ele.offsetTop;
+        var p = ele.offsetParent;
+        while (p) {
+            //break:结束整体循环,containe:跳出本次循环进入下次循环
+            //p为null或者document.body都退出循环
+            //如果不加!p这个条件的话，这样执行会出错,getOffset(document.body)
+            //offsetleft:计算细节是从哪里开始到哪里结束,
+            if (!p || p == document.body)break;
+            if (window.navigator.userAgent.indexOf("MSIE 8") > -1) {
+                //如果是IE8，就直接累加，不计算边框宽度了
+                l += p.offsetLeft;
+                t += p.offsetTop;
+            } else {
+                l += p.offsetLeft + p.clientLeft;
+                t += p.offsetTop + p.clientTop;
+            }
+
+            p += p.offsetParent;
+        }
+        return {
+            left: l,
+            top: t,
+        };
+    }
+    var ele = document.getElementsByTagName('body');
+    console.log(window.navigator.userAgent);
+</script>
+</body>
+</html>

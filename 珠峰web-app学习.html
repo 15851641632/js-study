@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <script>
+        var winw = document.documentElement.clientWidth;
+        var desw = 640;//设计图宽度
+        var scale = desw / 100;//缩放的比例
+        document.documentElement.style.fontSize = winw / scale + 'px';
+        if (winw > desw) {
+            document.documentElement.style.fontSize = "100px";
+        }
+    </script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: Helvetica;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        header {
+            text-align: center;
+            height: 0.8rem;
+            line-height: 0.8rem;
+            font-size: 0.36rem;
+            position: relative;
+            background-color: deepskyblue;
+        }
+
+        header span {
+            position: absolute;
+            left: 0.46rem;
+            top: 0.02rem;
+            display: block;
+        }
+
+        header span:before {
+            content: "";
+            width: 0.2rem;
+            height: 0.2rem;
+            border-top: 2px solid black;
+            border-left: 2px solid black;
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            position: absolute;
+            left: -0.2rem;
+            top: 0.25rem;
+        }
+
+        header ul {
+            width: 0.7rem;
+            height: 0.26rem;
+            line-height: 0.26rem;
+            position: absolute;
+            right: 0.1rem;
+            top: 0.3rem;
+        }
+
+        header ul li {
+            width: 0.12rem;
+            height: 0.12rem;
+            margin: 0 0.02rem;
+            float: left;
+            border-radius: 50%;
+        }
+        .aa div{
+            box-sizing: border-box;
+        }
+        .aa div:nth-child(1){
+            padding-left: 1rem;
+            float: left;
+            width:50%;
+            text-align: center;
+        }
+        .aa div:nth-child(2){
+            padding-left: 1rem;
+            float: right;
+            width: 50%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <span>返回</span>
+    美国vs西班牙
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</header>
+<!--<section class="main">-->
+    <!--<section class="score">-->
+        <!--<p></p>-->
+        <!--<p>180:169</p>-->
+        <!--<p></p>-->
+    <!--</section>-->
+<!--</section>-->
+<section class="aa">
+<div>1</div>
+    <div>dfd</div>
+</section>
+<script>
+    //如果设计宽度是750,HTML字体大小设为100px
+    //640/font-size=750/100,求出font-size
+</script>
+</body>
+</html>
