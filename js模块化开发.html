@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="seajs/sea.js"></script>
+</head>
+<body>
+<script>
+    //seajs.js+grunt.js
+    /*
+     接收两个参数:第一个参数:模块的地址,第二个参数：回调函数
+     sea的默认根目录：就是sea.js这个文件所在目录
+     */
+
+    //grunt安装
+    //npm install -g grunt-cli
+    //npm install grunt --save-dev
+
+    seajs.use('./seajs/module.js', function (ex) {
+        ex.show();
+    });
+    seajs.use('./seajs/module2.js', function (ex) {
+        ex.show2();
+    });
+</script>
+</body>
+</html>

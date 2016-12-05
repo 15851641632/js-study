@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <meta charset="utf-8">
+</head>
+<!--ng-init用来声明属性,将属性声明在当前作用域下，应为当前只有一个作用域，所以声明到了$rootScope-->
+<body ng-init="name={age:22}">
+<script>
+    //console.log(angular);
+    //ng-app属性，就是告诉angular哪里范围归angular管理,在一个项目中只能指定一次ng-app
+    //ng-model是实现双向数据绑定的,只能放在视图可修改的地方(数据改变<->视图改变)
+    //在ng-model上声明的属性,会在当前作用域下查找，如果找不到就声明一个
+    //ng-bind和{{}}是一样的，都是用来绑定数据,ng-bind可以解决闪烁问题(刷新时候会瞬间看到{{}}的原始形态，未解析的时候的样子)
+    //ng-bind是类似于.html这种形式，插入数据的时候，会把原来的数据全部给覆盖掉，{{}}这种形式就不会覆盖，会在原始数据后面接着
+    //想原样进行输出ng-no-bindable
+    //绑定多个模板:<div ng-bind-template="{{name}} {{age}}"></div>
+    //在angular.js中可以使用ng-cloak来解决闪烁问题,使用的时候先要让ng-cloak的display为none,等内部数据编译好后，在将其移除
+</script>
+<div >
+    <!--<p>名字 : <input type="text" ng-model="name.age"></p>-->
+    <!--<p>年龄 : <input type="text" ng-model="age"></p>-->
+    <!--<h1 ng-bind="name">44444</h1>-->
+    <!--<br/>-->
+    <!--<h1>2222222{{name?name:'hello zfpx'}}</h1>-->
+    <!--<div ng-non-bindable="">{{原样输出}}</div>-->
+    <!--<div ng-bind-template="{{name}} {{age}}"></div>-->
+
+    <!--声明类型：数组、数字、字符串、对象，不能声明函数-->
+    <!--<div ng-cloak ng-model="name">-->
+        <!--{{name}}-->
+        <!--{{age}}-->
+        <!--<div>-->
+            <!--{{age}}-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+<style>
+    [ng-cloak]{
+        display: none;
+    }
+
+</style>
+<script src="./node_modules/angular/angular.min.js"></script>
+
+</body>
+</html>

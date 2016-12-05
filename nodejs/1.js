@@ -68,14 +68,14 @@ new Buffer(size) 创建一个Buffer，并为这个对象设定一个大小
 //     //console.log(String.fromCharCode(bf3[i]));逐个输出字母
 // }
 
-var bf=new Buffer('miaov');
-var bf4=new Buffer(20);
-// bf4=bf;//这样直接赋值会是引用，后期修改bf4会影响到bf
-// bf4[2]='3';
-// console.log(bf4);
-// console.log(bf);
-bf.copy(bf4);//使用copy方法将bf中的内容拷贝到bf4中，就不会互相影响了
-bf4[2]='3';
-console.log(bf);
-console.log(bf4);
-
+//var bf=new Buffer('miaov');
+//var bf4=new Buffer(20);
+//// bf4=bf;//这样直接赋值会是引用，后期修改bf4会影响到bf
+//// bf4[2]='3';
+//// console.log(bf4);
+//// console.log(bf);
+//bf.copy(bf4);//使用copy方法将bf中的内容拷贝到bf4中，就不会互相影响了
+//bf4[2]='3';
+//console.log(bf);
+//console.log(bf4);
+process.stdout.write('aaaaa');

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div runoob-directive class="box">111</div>
+<div runoob-directive class="box">222</div>
+<div runoob-directive class="box">333</div>
+
+<script src="./node_modules/angular/angular.js"></script>
+<script>
+    //指令是不依赖于控制器，但是依赖于模块,
+    // 必须先创建模块，
+    //    var app = angular.module('appModule', []);
+    //通过模块来创建指令
+    //参数1：指令的名字
+    //参数2：指令的函数
+    //指令的使用范围可以 Element attribute comment  class (EAMC)
+    //指令分为两类:1、组件式指令，装饰型指令
+    //在js中如果是xx-xxx这种写法的，angular自定义指令名都要改为xxXxx
+
+    var app = angular.module("myApp", []);
+    app.directive("runoobDirective", function () {
+        return {
+            //template: "<div>自定义指令!</div>",
+            //replace:true,
+            link: function (scope, element, attrs) {
+                //element为JQ对象
+                //element.css('border','1px solid red');
+                //封装拖拽指令的好处就是，可以到处复用，不会冲突
+                element.on('mousedown', function (ev) {
+                    //var ev=ev||event;
+                    var disx = ev.pageX - this.offsetLeft;
+                    var disy = ev.pageY - this.offsetTop;
+                    angular.element(document).on('mousemove', function (ev) {
+                        element.css({
+                            left: (ev.pageX - disx) + 'px',
+                            top: (ev.pageY - disy) + 'px'
+                        })
+
+                    })
+                    angular.element(document).on('mouseup', function (ev) {
+                        angular.element(document).off();
+                    })
+                    ev.preventDefault();
+                })
+            }
+        };
+    });
+
+
+    //    app.directive('zfWeb', function () {
+    //        return {
+    //            //限制生效范围,一般情况下不用class和comment
+    //            //restrict: 'ECMA',
+    //            //默认指令的范围EA,我们可以给指令添加模板
+    //            template:"<div>hello world</div>",
+    //            //将原指令替换掉
+    //            replace: true
+    //        }
+    //    });
+
+</script>
+</body>
+</html>

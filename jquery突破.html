@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="./js/jquery.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            /*padding: 10px;*/
+            background-color: red;
+            /*margin: 10px;*/
+            /*position: relative;*/
+            border: 1px solid black;
+        }
+
+        .box2 {
+            width: 50px;
+            height: 50px;
+            /*padding: 10px;*/
+            background-color: yellow;
+            /*margin: 10px;*/
+            position: absolute;
+            left: 20px;
+            /*margin: 20px;*/
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body style="height: 2000px;">
+<div class="box">
+    <div class="box2">
+
+    </div>
+</div>
+<script>
+    $(function () {
+        /*
+         width():width
+         innerWidth():padding+width
+         outerWidth():border+padding+width
+         outerWidth(true):border+padding+width+margin
+
+         width(200)---对象宽度设置为200px
+         innerWidth(200)---对象宽度为200-padding值
+         outerWidth(200)---对象宽度为200-padding-border
+         outerWidth(200,true)---对象宽度为200-padding-border-margin
+
+         原生JS是不能获取隐藏元素的尺寸的，JQ方法可以
+         */
+
+        /*
+         1、 获取可视区高:alert($(window).height());
+         2、 获取页面的高:alert($(document).height());
+         3、 滚动距离：console.log($(document).scrollTop());
+         3=2-1（三者之间的关系）
+         */
+
+
+        //offset:
+        /*
+         1、console.log($('.box').offset().left);//如果父级就是html的话，就是相对于整个页面获取距离
+         2、console.log($('.box2').offset().left);//如果自身有定位，那么就是获取的是到父级(有定位)的距离
+         3、console.log($('.box2').position().left);//同2,但是不包含margin,
+         4、当box2想获取margin值，并且box2没有定位属性，可以用5的方法，获取box2到页面的距离-获取父级到页面的距离
+         5、console.log($('.box2').offsetParent());//获取拥有定位属性的父级
+
+         */
+
+    })
+</script>
+</body>
+</html>
