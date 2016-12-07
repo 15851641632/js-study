@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--如果之前已经使用了http的clone地址的，每次push代码都需要输入用户名和密码-->
+<!--那么使用git remote rm origin-->
+<!--git remote -v 查看当前是什么方式配置的clone-->
+<!--git remote add origin xxxxxxx（ssh地址）-->
+
+<!--接下来设置公钥、私钥-->
+<!--产生钥匙-->
+<!--ssh-keygen -t rsa -c "1364657240@qq.com"-->
+<!--查看本地是否有钥匙-->
+<!--cd ~/.ssh/-->
+
+<!--git创建分支-->
+<!--创建分支-->
+git branch branch_name
+<!--本地切换到这个分支-->
+git checkout branch_name
+
+<!--创建并直接切换到这个分支-->
+git checkout -b branch_name
+
+<!--分支合并，比如将分支develop合并到master分支-->
+git checkout master
+git merge master develop
+
+</body>
+</html>
