@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="./js/jquery.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+
+        li {
+            border: 1px solid black;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<!--<ul>-->
+<!--<li>1</li>-->
+<!--<li>2</li>-->
+<!--<li>3</li>-->
+<!--</ul>-->
+
+<!--<input type="button" class="btn" value="增加"/>-->
+<script>
+    $(function () {
+//        var timer = null;
+//        var islock = false;
+//        $('.btn').on('click', function () {
+//            $('ul').append($("<li>新增加的</li>"));
+////            if(!islock){
+////                timer=setInterval(function () {
+////                    console.log(111);
+////                },500)
+////                islock=!islock;
+////            }else{
+////                clearInterval(timer);
+////                islock=!islock;
+////            }
+//
+//        })
+//        $('ul').on('click', 'li', function (ev) {
+//            $(this).css('backgroundColor', 'red');
+//            $(ev.target).off();
+//        })
+//
+//        $('.box').on('click', function (ev) {
+//            //console.log(ev.pageX)//鼠标的X值
+//            //console.log(ev.target);事件源
+//            var obj = ev.target;
+//            obj.style.backgroundColor = 'black';
+//            ev.stopPropagation();//阻止冒泡
+//        })
+//        $(document).on('contextmenu', function (ev) {
+//            ev.preventDefault();
+//            //return false//既阻止默认事件，又阻止冒泡
+//        })
+//
+//        $(document).on('click', function (ev) {
+//            //alert('冒泡');
+//        })
+//        $(document).on('keydown', function (ev) {
+//            //alert(ev.which);输出键值
+//            //alert(ev.ctrlKey);
+//        })
+
+
+        //trigger ：主动触发,命名空间不能省略写，必须写全，xxx.trigger('click.drag')不能写成xxx.trigger('.drag')
+        //off : 删除事件的时候，可以省略写，写成xxx.off('.drag') 就是指取消drag命名空间下的事件
+//        var $div=$('.box');
+//        $div.on('mousedown', function (ev) {
+//            var disx=ev.pageX-$(this).offset().left;
+//            var disy=ev.pageY-$(this).offset().top;
+//            $(document).on('mousemove.drag', function (ev) {
+//                $div.css('left',ev.pageX-disx);
+//                $div.css('top',ev.pageY-disy);
+//            })
+//            $(document).on('mouseup.drag', function () {
+//                $(this).off('.drag');
+//            })
+//        })
+
+
+//      $.xxx$.yyy  工具方法
+        //var arr = [];
+        //alert($.type(arr));//判断是什么类型
+
+        var json={
+            name:'hello',
+            age:22
+        }
+        var json2={};
+        //$.extend(json2,json,{sex:'男'});//浅拷贝，json对象的内容复制给json2,内容的复制就不是引用的复制，不会互相影响了
+        //json2.name='dddd';
+        //console.log(json2);
+        //console.log(json.name);
+
+        //$.extend(true,json,json2);//深拷贝,适用于对象里面的属性如果还是对象的话，相当于原生JS的递归实现
+        function show(){
+            alert(this);
+        }
+        //$.proxy(show,document,参数1，参数2)();
+        //$.proxy(show,document)(参数1，参数2);改变show函数的内部this指向，现在是指向了document,之后必须在后面加()调用，否则不执行
+        //如果不写，相当于show,函数必须要show()才算调用
+
+
+        $('.box').on('click', function () {
+            var _this=this;
+            setTimeout(function () {
+                $(_this).css('background','yellow');
+            },1000)
+        })
+    })
+</script>
+</body>
+</html>

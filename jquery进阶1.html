@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="./js/jquery.js"></script>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+        li{
+            line-height: 30px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script>
+    $(function () {
+//        $('.box').on('click', function () {
+////            $(this).animate({
+////                'width':'+=100',
+////            },2000)
+//
+//            $(this).animate({width: 300},
+//                    {
+//                        duration: 1000,
+//                        easing: linear,
+//                        complete: function () {
+//                            alert('回调函数');
+//                        },
+//                        step: function (a, b) {
+//                            //这个函数可以检测定时器的每一次变化
+//                            console.log(b.pos)//运动过程中的比例值(0-1)
+//                        }
+//                    })
+//
+//        })
+
+//        $.parseJSON  把json类型的字符串转换为真正的json
+//        $.parseHTML  转换html形式的字符串为DOM节点，放到一个数组中
+
+        $('ul li').slice(1).css('background','red');
+    })
+</script>
+</body>
+</html>
