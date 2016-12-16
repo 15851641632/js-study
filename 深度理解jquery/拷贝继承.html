@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//原型：css中的class
+//普通方法：css中的style
+function Person(name,age){
+    this.name=name;
+    this.age=age;
+}
+var obj=new Person('zhang123',22);
+function Student(name,age,job){
+    /*
+    这样调用父级函数，并把this指向当前，就可以把父级的属性给继承过来了，
+     */
+    Person.call(this,name,age);
+    this.job=job;
+}
+Student.prototype.test= function () {
+    console.log(this.name);
+}
+/*
+这样可以把对象的方法继承过来，但是有个问题，就是对象赋值给对象之后，产生了引用的问题，所以不能这样直接赋值
+ */
+//Student.prototype=Person.prototype
+/*
+把obj的值用for in循环给取出来，把值赋值给copy对象，而不是直接把对象赋给，就不会产生引用问题
+ */
+function extend(copy,obj){
+    for(var attr in obj){
+        copy[attr]=obj[attr];
+    }
+}
+extend(Student.prototype,Person.prototype);
+
+var obj= new Person('1111',22);
+var obj2=new Student('dfd',33,'圆圆');
+    obj2.test();
+
+</script>
+</body>
+</html>

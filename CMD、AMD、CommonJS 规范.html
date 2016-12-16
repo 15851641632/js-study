@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CMD、AMD、CommonJS 规范</title>
+    <script src="js/require.js"></script>
+</head>
+<body>
+<!--AMD规范:在该机制下模块和依赖可以异步加载，这对浏览器端的异步加载尤其适用-->
+<!--http://jirengu.com/app/watch/1221/1?vsum=75  未完-->
+<script>
+    requirejs.config({
+        //baseURL用来设置常用的路径
+        baseUrl: "js",
+        //paths用来加载一些例外的文件路径，缩短文件路径
+//    paths:{
+//        'jquery':'11'
+//    }
+    });
+    //加载入口模块
+    requirejs(['app/amd-main']);
+    console.log('start....');
+</script>
+</body>
+</html>

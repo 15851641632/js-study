@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var a = {
+        name: '小明'
+    }
+    var b = cloneObj(a);
+    //b.name = '小强';
+    console.log(b.name);
+    function cloneObj(obj) {
+        var F = function () {}
+        F.prototype = obj;
+        return new F();
+    }
+</script>
+</body>
+</html>

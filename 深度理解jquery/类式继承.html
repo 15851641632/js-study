@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //原型：css中的class
+    //普通方法：css中的style
+    function Person(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    Person.prototype.sayName= function () {
+        console.log(this.name);
+    }
+    function Student(name,age,job){
+        /*
+        下面的方式继承了方法，属性则通过这样父函数call的方式来继承
+        */
+        Person.call(this,name,age);
+        this.job=job;
+    }
+
+    var F= function () {}
+    F.prototype=Person.prototype;
+    /*
+    做一个空的函数F，把父类的原型赋值给F的原型，这样F里面就具有了原型上的方法，而不具有属性，
+    在把new F出来的对象赋给Student.prototype,这样student就通过F继承了父类的方法，但是这一步同时也修改了prototype的
+    constructor指向所以后面需要手动修正指向
+     */
+    Student.prototype=new F();
+    Student.prototype.constructor=Student;
+    var obj=new Student('131313',444,'演员');
+    //console.log(Student.prototype.constructor);
+    console.log(obj.name);
+    var obj2=new Person('lll',11);
+    console.log(obj2.age);
+</script>
+</body>
+</html>

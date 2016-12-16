@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="./js/jquery.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrap, .wrap2 {
+            position: relative;
+            height: 230px;
+        }
+
+        .wrap input, .wrap2 input[type='button'] {
+            /*float: left;*/
+            list-style: none;
+            width: 50px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .content {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            display: none;
+            /*margin-top: 30px;*/
+            position: absolute;
+            top: 30px;
+        }
+
+        .focus {
+            background-color: red;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="box">地方大幅度发</div>-->
+<div class="wrap">
+    <input type="button" class="focus" value="1"/>
+    <input type="button" value="2"/>
+    <input type="button" value="3"/>
+
+    <div class="content" style="display: block;">1111</div>
+    <div class="content">2222</div>
+    <div class="content">3333</div>
+</div>
+<div class="wrap2">
+    <input type="button" class="focus" value="1"/>
+    <input type="button" value="2"/>
+    <input type="button" value="3"/>
+
+    <div class="content" style="display: block;">1111</div>
+    <div class="content">2222</div>
+    <div class="content">3333</div>
+</div>
+<script>
+    $(function () {
+//        tab切换插件
+        var t1 = new Tab();
+        t1._init('wrap', {});
+
+        var t2 = new Tab();
+        t2._init('wrap2', {
+            event: 'mouseover',
+            delay: 500
+        });
+
+    });
+
+
+    function Tab() {
+        this.oparent = null;
+        this.aInput = null;
+        this.aDiv = null;
+        this.timer = null;
+        this.settings = {
+            event: 'click',
+            delay: 0
+        }
+    }
+    /*
+     options:配置参数
+     settings:默认参数
+     */
+
+    Tab.prototype = {
+        constructor: Tab,
+        _init: function (oParent, options) {
+            $.extend(this.settings, options);
+            this.oparent = $('.' + oParent);
+            this.aInput = this.oparent.find('input');
+            this.aDiv = this.oparent.find('div');
+            this._change();
+        },//end
+        _change: function () {
+            var This = this;
+            this.aInput.on(this.settings.event, function () {
+//                console.log("这是当前的this:"+this);
+//                console.log("这是当前的$对象:"+$(this));
+                var jq_current = $(this);
+                if (This.settings.event == 'mouseover' && This.settings.delay != 0) {
+                    this.timer = setTimeout(function () {
+                        This._show(jq_current);
+                    }, This.settings.delay)
+                } else {
+                    This._show(jq_current);
+                }
+
+            }).mouseout(function () {
+                clearTimeout(this.timer);
+            })
+        }, //end
+        _show: function (current) {
+            current.attr('class', 'focus').siblings('input').attr('class', '');
+            var index = current.index();
+            this.aDiv.eq(index).css('display', 'block').siblings('div').css('display', 'none');
+        },
+
+
+    }
+
+
+</script>
+</body>
+</html>
