@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../tool.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+            float: left;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            background-color: orange;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            width: 330px;
+            height: 330px;
+            margin: 0 auto;
+            position: relative;
+            /*border: 1px solid black;*/
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: relative;
+            left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<ul id="ul">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+</ul>
+<div id="box"></div>
+<input type="button" id="random_btn" value="随机排序">
+<script>
+    window.onload = function () {
+        var oli = document.getElementsByTagName('li');
+        var posarr = [];
+        var index = 1;
+        var obtn = document.getElementById('random_btn');
+        for (var i = 0; i < oli.length; i++) {
+            posarr.push([oli[i].offsetLeft, oli[i].offsetTop]);
+
+        }
+        for (var i = 0; i < oli.length; i++) {
+            oli[i].style.position = 'absolute';
+            oli[i].style.left = posarr[i][0] + 'px';
+            oli[i].style.top = posarr[i][1] + 'px';
+            oli[i].index = i;
+            drag(oli[i]);
+        }
+        obtn.onclick = function () {
+            var arr = [2, 3, 1, 4, 6, 8, 5, 7, 0];
+            arr.sort(function (n1, n2) {
+                return Math.random() - 0.5;
+            })
+            for (var i = 0; i < oli.length; i++) {
+                startMove(oli[i], {left: posarr[arr[i]][0], top: posarr[arr[i]][1]});
+                oli[i].index = arr[i];
+            }
+        }
+        function drag(obj) {
+            var disx = 0, disy = 0;
+            obj.onmousedown = function (ev) {
+                var ev = ev || event;
+                this.style.zIndex = index++;
+                disx = ev.clientX - obj.offsetLeft;
+                disy = ev.clientY - obj.offsetTop;
+                document.onmousemove = function (ev) {
+                    var ev = ev || event;
+                    obj.style.left = ev.clientX - disx + 'px';
+                    obj.style.top = ev.clientY - disy + 'px';
+                    for (var i = 0; i < oli.length; i++) {
+                        oli[i].style.border = '';
+
+                    }
+
+                    var nl = near(obj);
+
+                    if (nl) {
+                        nl.style.border = '2px solid red';
+                    }
+                }
+                document.onmouseup = function () {
+                    document.onmousemove = document.onmouseup = null;
+                    var nl = near(obj);
+                    var tmp = 0;
+                    if (nl) {
+                        startMove(nl, {left: posarr[obj.index][0], top: posarr[obj.index][1]});
+                        startMove(obj, {left: posarr[nl.index][0], top: posarr[nl.index][1]});
+                        nl.style.border = '';
+                        tmp = obj.index;
+                        obj.index = nl.index;
+                        nl.index = tmp;
+                        //console.log(nl.index+'========'+obj.index);
+                    } else {
+                        startMove(obj, {left: posarr[obj.index][0], top: posarr[obj.index][1]});
+                    }
+
+                }
+                return false;
+            }
+        }//end
+
+        function near(obj) {
+            var index = -1;
+            var value = 9999;
+            for (var i = 0; i < oli.length; i++) {
+                if (afoul(obj, oli[i]) && obj != oli[i]) {
+                    var c = gouwudingli(obj, oli[i]);
+                    if (c < value) {
+                        value = c;
+                        index = i;
+                    }
+                }
+            }
+            if (index != -1) {
+                return oli[index];
+            } else {
+                return false;
+            }
+        }
+
+        function gouwudingli(obj1, obj2) {
+            var a = obj1.offsetLeft - obj2.offsetLeft;
+            var b = obj1.offsetTop - obj2.offsetTop;
+            return Math.sqrt(a * a + b * b);
+        }
+
+        /*
+         碰撞检测
+         */
+        function afoul(obj1, obj2) {
+            var l1 = obj1.offsetLeft;
+            var r1 = obj1.offsetLeft + obj1.offsetWidth;
+            var t1 = obj1.offsetTop;
+            var b1 = obj1.offsetTop + obj1.offsetHeight;
+
+            var l2 = obj2.offsetLeft;
+            var r2 = obj2.offsetLeft + obj2.offsetWidth;
+            var t2 = obj2.offsetTop;
+            var b2 = obj2.offsetTop + obj2.offsetHeight;
+
+
+            if (r1 < l2 || l1 > r2 || b1 < t2 || t1 > b2) {
+                //碰不到
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+
+    }
+</script>
+</body>
+</html>
