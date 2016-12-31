@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css"/>
+    <style>
+        #box{
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .fade-transition{
+            transition:1s all ease;
+        }
+        .fade-enter{
+            opacity: 0;
+        }
+        .fade-leave{
+            opacity: 0;
+            /*transform: translateX(200px);*/
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <input type="button" value="按钮" @click="toggle"/>
+    <div id="div1" v-show="show" transition="bounce" class="animated"></div>
+</div>
+<!--bower前端的包管理器-->
+<script>
+   new Vue({
+       el:'#box',
+       data:{
+           show:true,
+       },
+       methods: {
+           toggle: function () {
+              this.show=!this.show;
+           }
+       },
+       transitions:{
+           //定义所有动画
+           bounce:{
+               enterClass:'zoomInLeft',
+               leaveClass:'zoomOutRight'
+           }
+       }
+   })
+</script>
+</body>
+</html>

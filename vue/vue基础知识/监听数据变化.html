@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+    <script>
+        window.onload= function () {
+          var vm=  new Vue({
+                el:'body',
+                data:{
+                    a:1,
+                    b:2,
+                    c:{name:'tom',age:22}
+                }
+            })
+            vm.$watch('a', function () {
+                //console.log ('发生变化了');
+                //this.b=this.a;
+            })
+            vm.$watch('c', function () {
+                console.log ('json发生变化了');
+                //this.b=this.a;
+            },{deep:true})
+            document.onclick= function () {
+                //vm.a+=1;
+                vm.c.name='aaa';
+            }
+        }
+    </script>
+</head>
+<body>
+{{a}}
+<br/>
+{{b}}
+<br/>
+<!--json过滤器，可以展示json数据-->
+{{c | json}}
+</body>
+</html>

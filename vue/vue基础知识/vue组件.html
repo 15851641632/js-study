@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+<div id="box">
+    <aaa></aaa>
+    <bbb></bbb>
+</div>
+<template id="ccc">
+    <ul>
+        <li v-for="value in arr">
+            {{value}}
+        </li>
+    </ul>
+</template>
+<script>
+    //*******************全局组件*********************
+//   var Aaa= Vue.extend({
+//        template:'<h3>我是标题</h3>'
+//    })
+//   Vue.component('aaa',Aaa);
+
+//    var Aaa=Vue.extend({
+//        data(){
+//           return {
+//               msg:'我是标题3333',
+//           };
+//        },
+//        methods:{
+//            show(){
+//               this.msg='changed';
+//            }
+//        },
+//        template:'<h3 @click="show">{{msg}}</h3>'
+//    })
+    //*******************全局组件*********************
+    //*******************局部组件*********************
+//    var Aaa= Vue.extend({
+//        template:'<h3>{{msg}}<h3>',
+//        data(){
+//            return  {
+//                msg:'asfsfsfsf'
+//            }
+//        }
+//    })
+//    Vue.component('aaa',Aaa);
+
+    //*******************局部组件*********************
+
+    //**************另外一种方式************************
+    Vue.component('aaa',{
+        template:'<h3>我是标题333</h3>'
+    })
+    //**************另外一种方式************************
+
+    new Vue({
+        el:'#box',
+        data:{
+            arr:[2,3,4,5,6,7]
+        },
+        //在这里的就是局部组件
+//        components:{
+//            'aaa':Aaa
+//        }
+//        components:{
+//            'bbb':{
+//                data(){
+//                    return {
+//                        msg:'welcome'
+//                    }
+//                },
+//                template:'<h1>{{msg}}</h1>'
+//            }
+//        }
+            template:'#ccc'
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="bower_components/vue/dist/vue.js"></script>
+	<meta charset="utf-8">
+</head>
+<body>
+<div id="box">
+	<aaa>
+		<ul slot="ul-slot">
+			<li>111</li>
+			<li>222</li>
+			<li>232323</li>
+		</ul>
+	</aaa>
+</div>
+<template id="aaa">
+	<h1>fsfjsfsfs</h1>
+	<slot name="ul-slot">书法家刘师傅吉林省</slot>	
+</template>
+<script type="text/javascript">
+	new Vue({
+		el:'#box',
+		data:{
+
+		},
+		components:{
+			'aaa':{
+				template:'#aaa'
+				// template:'<h1>送福利及律师费结束了<h1>'
+			}
+		}
+	})
+</script>
+</body>
+</html>
