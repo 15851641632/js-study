@@ -4,12 +4,15 @@
 	</ul>	
 </template>
 <script>
+
 	export default{
 	 data(){
 	    return {
 	        list:['apple','pear','banana']
 	    }
-	 }
+	 },
+	
+
 	}
 
 </script>

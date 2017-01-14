@@ -4,6 +4,7 @@ import Menu from './components/Menu.vue'
 import Login from './components/Login.vue'
 import Reg from './components/Reg.vue'
 import Detail from './components/Detail.vue'
+import Connect from './components/Connect.vue'
 
 
 export default{
@@ -21,14 +22,23 @@ export default{
 	'/news':{
 		component:News,
 		subRoutes:{
-			'detail/:id':{
+			'detail/:ids':{
+				//需要显示的子组件的内容
 				component:Detail
 			}
 		}
 	},
 	'menu':{
 		component:Menu
-	}
+	},
+	'connect':{
+		component:Connect,
+		subRoutes:{
+			'con/:phone':{
+				component:Detail
+			}
+		}
+	},
 
 }
 

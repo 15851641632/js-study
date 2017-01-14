@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="../vue-resource.js"></script>
+</head>
+<body>
+<div id="box">
+	<!-- <aaa></aaa> -->
+	<!-- <input type="button" value="ajax按钮" @click="start"> -->
+	<my-aaa></my-aaa>
+
+</div>
+<template id="aaa">
+	 <h1>标题1111</h1>
+	 <input type="button" value="ajax开始" @click="start">
+	 <ul>
+	 	<li v-for="value in arr">{{value}}</li>
+	 </ul> 
+	 <div>{{user}}</div>
+	<div>{{pwd}}</div>
+</template>
+<script type="text/javascript">
+//****************全局组件****************************
+	// var Aaa=Vue.extend({
+	// 	template:'<h3>我是标题3</h3>'
+	// });
+	// Vue.component('aaa',Aaa);
+	// // console.log(Aaa);
+	// var vm=new Vue({
+	// 	el:'#box',
+	// 	data:{
+	// 		bsgin:true
+	// 	}
+	// })
+//****************全局组件****************************
+
+	// Vue.component('aaa',{
+	// 	//组件里面放数据，data必须是函数形式且必须返回一个对象
+	// 	data(){
+	// 		return {
+	// 			msg:'123'
+	// 		}
+	// 	},
+	// 	methods:{
+	// 		change(){
+	// 			this.msg="被改变了";
+	// 		}
+	// 	},
+	// 	template:'<h1 @click="change">{{msg}}</h1>'
+	// });
+	// // console.log(Aaa);
+	// var vm=new Vue({
+	// 	el:'#box',
+	// 	data:{
+	// 		bsgin:true
+	// 	}
+	// })	
+	
+
+//*************************局部组件|***************	
+// var Aaa=Vue.extend({
+// 	template:"<h1>{{msg}}</h1>",
+// 	data(){
+// 		return {
+// 			msg:'我是局部组件'
+// 		}
+// 	}
+// })
+
+// var vm=new Vue({
+// 	el:"#box",
+// 	data:{
+// 		bsigin:true
+// 	},
+// 	components:{
+// 		'aaa':Aaa
+// 	}
+// })
+//*************************局部组件|***************	
+
+
+//*************另一种方式的全局组件*******************
+// Vue.component('my-aaa',{
+// 	template:'<strong>好</strong>'
+// });
+// var vm=new Vue({
+// 	el:'#box',
+
+// })
+//*************另一种方式的全局组件*******************
+
+//***************另一种方式的局部组件********************
+// var vm=new Vue({
+// 	el:"#box",
+// 	components:{
+// 		'my-aaa':{
+// 			data(){
+// 				return {
+// 					msg:'我是data里面返回的数据'
+// 				}
+// 			},
+// 			methods:{
+// 				change(){
+// 					this.msg='xxxxx'
+// 				}
+// 			},
+// 			template:'<h1 @click="change">我是一个局部组件->{{msg}}</h1>'
+// 		}
+// 	}
+// })
+//***************另一种方式的局部组件********************
+
+
+//把template里面的内容提取出来，单独放
+
+
+var vm=new Vue({
+	el:"#box",
+	components:{
+		'my-aaa':{
+			data(){
+				return {
+					arr:['apple','pear','bananba'],
+					msg:'我是data里面返回的数据',
+					user:'123',
+					pwd:'ddd'
+				}
+			},
+			methods:{
+				change(){
+					this.msg='xxxxx'
+				},
+				start: function () {
+                   this.$http.get('../test.php').then(function(res){
+                       console.log(res.data);
+                       this.user=res.data.username;
+                       this.pwd=res.data.pwd;
+                   }, function (res) {
+                       // alert(res.status);
+                       console.log(res.status);
+                   })
+               },
+			},
+			template:'#aaa'
+		}
+	}
+})
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

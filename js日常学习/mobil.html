@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"> -->
+    <script type="text/javascript" src='../js/jquery.js'></script>
+    <!--<script type="text/javascript" src="../js/jquery.tools.js"></script>-->
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-resource.js"></script>
+    <style type="text/css">
+        div {
+            width: 200px;
+            height: 200px;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: red;
+        }
+        .content{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <input type="text"  value="{{msg}}" v-model="msg"/>
+    <div class="content">{{msg}}</div>
+    <input type="button" value="点击隐藏" @click="show"/>
+    <input type="button" value="增加li" @click="add_li"/>
+    <div  v-show="is_show" v-drag="color" :class="{box2:true}"></div>
+    <ul>
+        <li v-for="value in arr" track-by="$index">{{$index}}、{{value}}</li>
+    </ul>
+</div>
+
+<template id="ccc">
+
+</template>
+<script>
+    Vue.component({
+        template: '<h1>我是vue组件</h1>'
+    })
+    Vue.directive('drag', function (color) {
+        var odiv=this.el;
+        odiv.style.backgroundColor=color;
+        odiv.onmousedown= function (ev) {
+            var ev=ev||event;
+            var disx=ev.clientX-odiv.offsetLeft;
+            var disy=ev.clientY-odiv.offsetTop;
+            document.onmousemove= function (ev) {
+                var ev=ev||event;
+                odiv.style.left=ev.clientX-disx+'px';
+                odiv.style.top=ev.clientY-disy+'px';
+            }
+            document.onmouseup= function () {
+                document.onmousemove=document.onmouseup=null;
+            }
+        }
+    })
+    new Vue({
+        el: '#box',
+        data: {
+            msg: '123321',
+            is_show:true,
+            arr:['apple','pear','banana','hello'],
+            color:'black'
+        },
+      methods:{
+          change: function () {
+              this.msg='单击改变文字';
+          },
+          show: function () {
+              this.is_show=!this.is_show;
+          },
+          add_li: function () {
+              this.arr.push('bear');
+          }
+      },
+//        template: '#ccc'
+    })
+</script>
+</body>
+</html>

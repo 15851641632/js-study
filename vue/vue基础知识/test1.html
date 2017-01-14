@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+ 	<script>
+        var winw = document.documentElement.clientWidth;
+        var desw = 640;//设计图宽度
+        var scale = desw / 100;//缩放的比例
+        document.documentElement.style.fontSize = winw / scale + 'px';
+        if (winw > desw) {
+            document.documentElement.style.fontSize = "100px";
+        }
+    </script>
+	<style type="text/css">
+		*{padding: 0;margin: 0;font-family: '微软雅黑'}
+		.header{
+			width: 100%;
+			height: 1rem;
+			line-height: 1rem;
+			text-align: center;
+			font-size: 16px;
+			background-color: red;
+			color: white;
+		}
+		ul{
+			font-size: 16px;
+		}
+
+		li{
+			overflow: hidden;
+			list-style: none;
+			line-height: 0.8rem;
+			border-bottom: 1px solid #eee;
+		}	
+		.focus{
+			background-color: blue;
+		}
+		.list-left{
+			float: left;
+			margin-left: 0.2rem;
+		}
+		.list-right{
+			float: right;
+		}
+		.list-group-left{
+			float: left;
+			margin-right: 0.5rem;
+		}
+		.list-group-right{
+			float: right;
+			margin-right: 0.1rem;
+		}
+		.list-group-left .icon,.list-group-right .icon{
+			display: inline-block;
+			width: 0.5rem;
+			height: 0.5rem;
+			border-radius: 50%;
+			border: 1px solid black;
+			position: relative;
+			top: 5px;
+		}
+		.other{
+			float: left;
+			margin-left: 0.2rem;
+		}
+
+	</style>
+</head>
+<body>
+
+<div id="container">
+	<header class="header"><span class="icon_back"></span>APP选项</header>	
+	<section class="content_ar"> 
+		<ul>
+			<li>
+				<!-- 列表1 -->
+				<div class="list-left"><span>搜索</span></div>
+				<div class="list-right">
+					<div class="list-group-left">
+						<!-- 按钮组的左边一组 -->
+						<span class="icon focus"></span>
+						<span>周边</span>
+					</div>
+
+					<div class="list-group-right">
+						<!-- 按钮组的右边一组 -->
+						<span class="icon"></span>
+						<span>圆形区域</span>
+					</div>
+
+				</div>
+			</li>
+			<li>
+				<!-- 列表2 -->
+				<div class="list-left"><span>位置选项</span></div>
+				<div class="list-right">
+					<div class="list-group-left">
+						<!-- 按钮组的左边一组 -->
+						<span class="icon focus"></span>
+						<span>GPS定位</span>
+					</div>
+
+					<div class="list-group-right">
+						<!-- 按钮组的右边一组 -->
+						<span class="icon"></span>
+						<span>选择位置</span>
+					</div>
+
+				</div>
+			</li>
+			<li>
+				<!-- 列表3 -->
+				<div class="list-left"><span>没有号码是否显示</span></div>
+				<div class="list-right">
+					<div class="list-group-left">
+						<!-- 按钮组的左边一组 -->
+						<span class="icon focus"></span>
+						<span>否</span>
+					</div>
+
+					<div class="list-group-right">
+						<!-- 按钮组的右边一组 -->
+						<span class="icon"></span>
+						<span>是</span>
+					</div>
+
+				</div>
+			</li>
+			<li>
+				<!-- 列表4 -->
+				<div class="list-left"><span>设备序号</span></div>
+				<div class="list-right other">
+					<div class="list-group-left">
+						<!-- 按钮组的左边一组 -->
+						<!-- <span class="icon focus"></span> -->
+						<span>1231231313131</span>
+					</div>
+
+
+				</div>
+			</li>
+		</ul>
+	</section>
+	<footer></footer>
+</div>
+
+</body>
+</html>

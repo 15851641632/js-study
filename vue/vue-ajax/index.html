@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="../vue基础知识/vue-resource.js"></script>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+	<style type="text/css">
+		.bg{
+			width: 200px;
+			height: 200px;
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+
+<input type="button" value="接收数据" @click="get">
+<div class="box" :class={bg:true}>
+	
+</div>
+用户名:<input type="button" value="" name="username">
+密码:<input type="button" name="pwd">
+<ul>
+	<li v-for="value in ajax_msg">{{value}}</li>
+</ul>
+<script type="text/javascript">
+	new Vue({
+		 el:'body',
+         data:{
+         	ajax_msg:'123'
+         },
+         methods:{
+         	get:function(){
+           //      console.log(111);
+         		// var url="test.php";
+            	
+           //      this.$http.get(url).then(function(res){
+           //          // var json=data.body;
+           //          // this.data=eval("(" + json +")");
+           //          // console.log(res.data);
+           //          this.ajax_msg=res.data;
+           //      },function(res){
+           //          console.info(res);
+           //      })
+                var _this=this;    
+                $.ajax({
+                    url:'test.php',
+                    type:'GET',
+                    data:{},
+                    dataType:'JSON',
+                    success:function(res){
+                        console.log(this);
+                       _this.ajax_msg=res;
+                    },
+                })
+
+
+         	},
+         	post:function(){
+         		//向后台提交
+         		
+         	},
+         }
+            
+	})
+</script>
+
+
+</body>
+</html>

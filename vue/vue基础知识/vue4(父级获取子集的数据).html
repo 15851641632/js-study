@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="box">
+	<aaa></aaa>
+</div>
+<template id="aaa">
+	<input type="button" value="发送父组件数据">
+	<bbb @child-msg2="get"></bbb>
+</template>
+<template id="bbb">
+	<h1>子组件</h1>
+	<input type="button" value="发送子组件数据" @click="send">
+</template>
+<script type="text/javascript">
+	var vm=new Vue({
+		el:'#box',
+		data:{
+			a:'aaa'
+		},
+		components:{
+			'aaa':{
+				data(){
+					return {
+						msg2:'我是父组件的数据',
+						msg:'我是父组件第二条数据'
+					}
+				}, 
+				template:'#aaa',
+				methods:{
+					// 这个msg参数就是子组件传过来的数据
+					get(msg){
+						alert(msg);
+					}
+				},
+				components:{
+					'bbb':{
+						data(){
+							return {
+								a:'我是子组件的数据'
+							}
+						},
+						// props:['m','myMsg'],
+						template:'#bbb',
+						methods:{
+							send(){
+								//子组件把子集的数据发送到父级
+								//$emit('事件名','数据'); 
+								this.$emit('child-msg2',this.a)	
+							}
+						}
+					}
+				}
+			}
+		}
+	})
+</script>
+</body>
+</html>

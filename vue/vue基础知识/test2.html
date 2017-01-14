@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+ 	<script>
+        var winw = document.documentElement.clientWidth;
+        var desw = 640;//设计图宽度
+        var scale = desw / 100;//缩放的比例
+        document.documentElement.style.fontSize = winw / scale + 'px';
+        if (winw > desw) {
+            document.documentElement.style.fontSize = "100px";
+        }
+    </script>
+	<style type="text/css">
+		*{padding: 0;margin: 0;font-family: '微软雅黑'}
+		li{
+			list-style:none;
+		}
+		.header{
+			width: 100%;
+			height: 1rem;
+			line-height: 1rem;
+			text-align: center;
+			font-size: 16px;
+			background-color: red;
+			color: white;
+		}
+		.content{
+			font-size: 16px;
+		}
+		.content .content_search,.phone{
+			line-height: 1rem;
+			background-color: #eee;
+			border-bottom: 1px solid #ddd;
+		}
+		.content .content_search input{
+			width: 5rem;
+			line-height: 0.5rem;
+			margin-left: 0.5rem;
+			border: none;
+
+		}
+		.content .content_search a{
+			display: inline-block;
+
+		}
+		a{
+			color: white;
+			display: inline-block;
+			background-color: blue;
+			line-height: 30px;
+			text-decoration: none;
+			padding: 2px 5px 2px 5px;
+			border-radius: 5px;
+		}
+		.phone a{
+			/*display: inline-block;*/
+			float: right;
+			margin-right: 5px;
+			/*line-height: 30px;*/
+			margin-top: 0.2rem;
+			
+		}
+		.phone span{
+			display: inline-block;
+			margin-left: 1rem;
+		}
+		.menu_list{
+			line-height: 1rem;
+			border: 1px solid #eee;
+		}
+
+		.menu_list li{
+			border-bottom: 1px solid red;
+			overflow: hidden;
+		}
+		.group_left{
+			float: left;
+			margin-left: 0.2rem;
+		}
+		.group_left p{
+			line-height: 0.5rem;
+
+		}
+		.group_right{
+			float: right;
+			margin-right: 0.2rem;
+		}
+	</style>
+</head>
+<body>
+
+<div id="container">
+	<header class="header"><span class="icon_back"></span>百度地图数据</header>	
+	<section class="content">
+		<div class="content_search">
+			<input type="text">
+			<a href="">取消</a>
+		</div>
+		<div class="phone">
+			<span>仅显示手机号</span>
+			<a href="">一键导入432</a>
+		</div>
+		<div class="menu_list">
+			<ul>
+				<li>
+					<div class="group_left">
+						<p>黄师傅红烧牛肉面</p>
+						<p>15851641632</p>
+					</div>
+					<div class="group_right">
+						<a href="">添加</a>
+					</div>
+				</li>
+				<li>
+					<div class="group_left">
+						<p>北区拉面</p>
+						<p>15851641632</p>
+					</div>
+					<div class="group_right">
+						<a href="">添加</a>
+					</div>
+				</li>
+				<li>
+					<div class="group_left">
+						<p>重庆面馆</p>
+						<p>15851641632</p>
+					</div>
+					<div class="group_right">
+						<a href="">添加</a>
+					</div>
+				</li>
+				<li>
+					<div class="group_left">
+						<p>黄师傅红烧牛肉面</p>
+						<p>15851641632</p>
+					</div>
+					<div class="group_right">
+						<a href="">添加</a>
+					</div>
+				</li>
+				<li>
+					<div class="group_left">
+						<p>黄师傅红烧牛肉面</p>
+						<p>15851641632</p>
+					</div>
+					<div class="group_right">
+						<a href="">添加</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+	
+</div>
+
+</body>
+</html>

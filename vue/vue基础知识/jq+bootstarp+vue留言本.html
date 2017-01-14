@@ -3,10 +3,10 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
-    <script src="../js/jquery.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/vue.js"></script>
+    <link rel="stylesheet" href="../../bootstarp/css/bootstrap.min.css"/>
+    <script src="../../js/jquery.js"></script>
+    <script src="../../bootstarp/js/bootstrap.min.js"></script>
+    <script src="../bower_components/vue/dist/vue.js"></script>
     <script>
         window.onload=function(){
             new Vue({
@@ -59,7 +59,7 @@
     <table class="table table-bordered table-hover">
         <caption class="h2 text-info">用户信息表</caption>
         <tr>
-            <th class="text-right">序号</th>
+            <th class="text-center">序号</th>
             <th class="text-center">名字</th>
             <th class="text-center">年龄</th>
             <th class="text-center">操作</th>
@@ -69,7 +69,7 @@
             <td>{{value.name}}</td>
             <td>{{value.age}}</td>
             <td>
-                <input type="button" v-on:click="nowIndex=$index" value="删除"class="btn btn-primary btn-small" data-toggle="modal" data-target="#layer"/>
+                <input type="button" v-on:click="nowIndex=$index" value="删除" class="btn btn-primary btn-small" data-toggle="modal" data-target="#layer"/>
             </td>
         </tr>
         <tr v-show="myData.length!=0">

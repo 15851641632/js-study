@@ -3,8 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <script src="bower_components/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="bower_components/animate.css/animate.css"/>
+    <script src="../bower_components/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.css"/>
     <style>
         #box{
             width: 500px;
@@ -24,7 +24,7 @@
         }
         .fade-leave{
             opacity: 0;
-            /*transform: translateX(200px);*/
+            transform: translateX(200px);
         }
     </style>
 </head>
@@ -32,6 +32,8 @@
 <div id="box">
     <input type="button" value="按钮" @click="toggle"/>
     <div id="div1" v-show="show" transition="bounce" class="animated"></div>
+    <!-- fade就是对应fade-enter fade-leave -->
+    <!-- <div id="div1" v-show="show" transition="fade"></div> -->
 </div>
 <!--bower前端的包管理器-->
 <script>
@@ -49,7 +51,7 @@
            //定义所有动画
            bounce:{
                enterClass:'zoomInLeft',
-               leaveClass:'zoomOutRight'
+               leaveClass:'slideInDown'
            }
        }
    })

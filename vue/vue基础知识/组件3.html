@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>动态组件</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="box">
+	<input type="button" value="显示a" @click="a='aaa'">
+	<input type="button" value="显示b" @click="a='bbb'">
+	<component :is='a'></component>
+</div>
+<script type="text/javascript">
+	var vm=new Vue({
+		el:'#box',
+		data:{
+			a:'aaa'
+		},
+		components:{
+			'aaa':{
+				template:'<h1>我是aaa组件</h1>'
+			},
+			'bbb':{
+				template:'<h1>我是bbb组件</h1>'
+			}
+		}
+	})
+</script>
+</body>
+</html>

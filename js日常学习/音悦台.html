@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>音悦台</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-    <link rel="stylesheet" href="css/yinyuetai.css">
+    <link rel="stylesheet" href="../css/yinyuetai.css">
     <script>
         /*
          像素比2，意思就是在手机上以1个像素显示2个像素的东西，所以比如320宽度的元素，在IPHONE4下只显示一半的屏幕.
@@ -12,7 +12,7 @@
 
          */
         //横竖屏适配
-        //window.addEventListener('orientationchange', setSize);
+        window.addEventListener('orientationchange', setSize);
         window.addEventListener('resize', setSize);
         setSize();
         function setSize() {

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="description" content="" />
+    <meta name="keywords" content=""/>
+    <meta name="format-detection" content="telphone=no,email=no,address=no" />
+    <title>加减乘除计算器</title>
+    <style>
+	body{
+		margin: 0;
+	}
+    </style>
+</head>
+<body>
+<input type="text" value="" class="js-operator1" />
+<select name="" id="" class="js-type">
+    <option value="0">+</option>
+    <option value="1">-</option>
+    <option value="2">*</option>
+    <option value="3">/</option>
+</select>
+<input type="text" value="" class="js-operator2" />
+<input type="button" value="=" class="js-calculate">
+
+<span class="js-result"></span>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script>
+function calculate(type, operator1, operator2) {
+    var result;
+    switch (type) {
+        case '0':
+            result = operator1 + operator2;
+            break;
+        case '1':
+            result = operator1 - operator2;
+            break;
+        case '2':
+            result = operator1 * operator2;
+            break;
+        case '3':
+            result = operator1 / operator2;
+            break;
+        default:
+            result = undefined;
+    }
+    return result;
+}
+function isValidNumber(val) {
+    return typeof val === 'number' && false === window.isNaN(val);
+}
+$(function() {
+    var $operator1 = $('.js-operator1');
+    var $operator2 = $('.js-operator2');
+    var $type = $('.js-type');
+    var $result = $('.js-result');
+    $('.js-calculate').on('click', function(event) {
+        var operator1 = window.parseInt($operator1.val());
+        var operator2 = window.parseInt($operator2.val());
+        var type = $type.val();
+        var result;
+        if(false === isValidNumber(operator1)) {
+            alert('第一个数字不合法');
+            return;
+        }
+        if(false === isValidNumber(operator2)) {
+            alert('第二个数字不合法');
+            return;
+        }
+        result = calculate(type, operator1, operator2);
+        $result.html(result);
+    });
+});
+</script>
+</body>
+</html>

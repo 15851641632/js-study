@@ -1,9 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+<title></title>
+<meta charset="utf-8">
+<script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
+
+
+<style type="text/css">
+</style>
 </head>
 <body>
-  <h1>用于展示新闻页面的测试页</h1>
+<div id="box">
+<aaa></aaa>
+  {{msg}}
+  <br>
+  <input type="text" v-model='msg'>
+  <input type="button" value="add" @click='add' >
+  <div style="border: 1px solid black">{{num}}</div>
+  {{num}}
+</div>
+<script type="text/javascript">
+  // Vue.component('aaa',{
+  //   props: ['todo'],
+  //   template:'<h1>组件组件组件</h1>'
+  // })
+
+  // var vm=new Vue({
+  //   el:'#box',
+  //  data: {
+  //   groceryList: [
+  //     { text: 'Vegetables' },
+  //     { text: 'Cheese' },
+  //     { text: 'Whatever else humans are supposed to eat' }
+  //   ]
+  // }
+  //   methods:{
+  //     add(){
+  //       this.num+=1;
+  //     }
+  //   }
+  // })   
+
+var arr=[1,2,3,4,5,6];
+var res = arr.each(function (item,index,input) {
+     input[index] = item*10;
+})
+// console.log(res);//-->undefined;
+console.log(arr);//-->会对原来的数组产生改变；
+</script>
+
 </body>
 </html>

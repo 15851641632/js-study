@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>不使用webpack如何实现SPA</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="../bower_components/vue-router/dist/vue-router.min.js"></script>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		li{
+			list-style:none;
+			float: left;
+			width: 100px;
+			height: 30px;
+			line-height: 30px;
+		}
+		.clearfix{
+			content: ''
+			display: block;
+			clear: both;
+		}
+	</style>
+</head>
+<body>
+<div id="box">
+	<div class="contaniner">
+		<ul>
+			<li><a  v-link="{path:'/home'}">首页</a></li>
+			<li><a  v-link="{path:'/news'}">新闻</a></li>
+			<li><a  v-link="{path:'/home'}">联系方式</a></li>
+			<li><a  v-link="{path:'/Address'}">联系地址</a></li>
+		</ul>	
+	</div>
+	<div class="clearfix"></div>
+	<div>
+		<router-view></router-view>
+	</div>
+</div>
+
+<template id="hhh">
+	<h3>我是主页->{{msg}}->{{msg2}}</h3>
+</template>
+
+<script type="text/javascript">
+var App=Vue.extend();
+	//2、准备 home news组件
+	var Home=Vue.extend({
+		data(){
+			return {msg:'123',msg2:'666'}
+		},
+		template:'#hhh'
+	})
+
+	var News=Vue.extend({
+		template:'<h3>我是新闻业</h3>'
+	})
+
+	// var Address=Vue.component('my-ccc',{
+	// 	data(){
+	// 		return {msg:'另一种方式的模板绑定数据'}
+	// 	},
+	// 	template:'<h3>另一种方式的模板绑定->msg</h3>'
+	// })
+	//3、准备路由
+	var router=new VueRouter();
+	//4、关联
+	router.map({
+		'home':{
+			component:Home
+		},
+		'news':{
+			component:News
+		}
+	});
+	//跳转页面
+	router.redirect({
+		'/':'/home'
+	});
+	//5、启动路由
+	router.start(App,'#box');
+
+
+
+
+    Vue.component('my-menu',{
+    	data(){
+    		return {}
+    	},
+    	template:'#menu'
+    })
+	var vm=new Vue({
+		el:'#box',
+		data:{
+
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+1、$ npm install express    安装模块
+2、$ npm uninstall express  卸载模块
+3、$ npm update express     更新模块
+4、$ npm search express     搜索模块
+5、$ npm init               初始化文件夹，生成package.json文件
+6、
+$ npm adduser
+Username: mcmohd
+Password:
+Email: (this IS public) mcmohd@gmail.com     用邮箱注册npm资源库
+
+
+7、$ npm publish  6->发布模块
+
+//用淘宝的cnpm来代替默认的npm,
+8、$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+//然后就可以使用cnpm来安装包了
+9、$ cnpm install [name]
+10、
+11、
+12、
+13、
+14、
+15、
+16、
+17、
+18、
+19、
+20、
+21、
+22、
+23、
+24、
+25、
+26、
+27、
+28、
+
+
+babel命令行转码工具   babel-cli
+如果某些代码需要调用Babel的API进行转码，就要使用babel-core模块。
+babel的字符编码规则，babel-preset-es2015
+babel的react转码规则,babel-preset-react

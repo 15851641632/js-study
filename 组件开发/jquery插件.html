@@ -69,6 +69,7 @@
 
         function plugin_tab(options) {
             $parent = this;
+            //合并参数到settings中
             settings = $.extend(settings, defaults, options);
             create_ui();
             bind();
