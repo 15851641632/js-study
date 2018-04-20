@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		
+		<ul id="ultool">
+			
+		</ul>
+		
+		<script type="text/javascript">
+			var str="";
+			var ul=document.getElementById("ultool");
+			for(var i=0; i<10;i++){
+				var oli=document.createElement("li");
+				var p=document.createElement("p");
+				p.innerHTML+=i+"打发打发打发";
+				p.innerHTML+="9999";
+				oli.appendChild(p);
+				ul.appendChild(oli);
+			}
+			
+		</script>
+	</body>
+
+</html>

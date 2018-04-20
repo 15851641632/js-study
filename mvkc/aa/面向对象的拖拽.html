@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="tool.js"></script>
+		<style type="text/css">
+			#box,#box2{
+				width: 200px;
+				height: 200px;
+				border: 1px solid black;
+				position: absolute;
+			}
+			#box2{
+				left: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">1</div>
+		<div id="box2">2</div>
+		<script type="text/javascript">
+			function Drag(id){
+				this.odiv=document.getElementById(id);
+				this.disx=0;
+				this.disy=0;
+			}
+			Drag.prototype.init=function(){
+				var _this=this;
+				this.odiv.onmousedown=function(ev){
+					var ev=ev||event;
+					_this.fndown(ev);
+					return false;
+				}
+				
+			}
+			Drag.prototype.fndown=function(ev){
+				var ev=ev||event;
+				this.disx=ev.clientX-this.odiv.offsetLeft;
+				this.disy=ev.clientY-this.odiv.offsetTop;
+				var _this=this;
+				document.onmousemove=function(ev){
+					var ev=ev||event;
+					_this.fnmove(ev);
+				}
+				document.onmouseup=this.fnup;
+				
+			}
+			Drag.prototype.fnmove=function(ev){
+				var ev=ev||event;
+				this.odiv.style.left=ev.clientX-this.disx+'px';
+				this.odiv.style.top=ev.clientY-this.disy+'px';
+			}
+			Drag.prototype.fnup=function(){
+				document.onmousemove=null;
+				document.onmouseup=null;
+			}
+			
+			
+			
+			function childDrag(id){
+				Drag.call(this,id);
+			}
+			$api.extend(childDrag.prototype,Drag.prototype);
+			childDrag.prototype.fnmove=function(ev){
+				var ev=ev||event;
+				this.odiv.style.backgroundColor="aquamarine";
+				var L=ev.clientX-this.disx;
+				var T=ev.clientY-this.disy;
+				
+				if(L<0){
+					L=0;
+				}else if(L>document.documentElement.clientWidth-this.odiv.offsetWidth){
+					L=document.documentElement.clientWidth-this.odiv.offsetWidth;
+				}
+				this.odiv.style.left=L+'px';
+				this.odiv.style.top=T+'px';
+				
+			}
+			childDrag.prototype.fnup=function(){
+				document.onmousemove=null;
+				document.onmouseup=null;
+				
+			}
+			
+			var obj1=new Drag('box');
+			obj1.init();
+
+			var obj2=new childDrag('box2');
+			obj2.init();
+			
+		</script>
+	</body>
+</html>

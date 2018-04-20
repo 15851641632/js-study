@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js"></script>
+    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+</head>
+<style>
+    .mine{
+        background-color: #0d87cc;
+    }
+</style>
+<body>
+<input type="text" name="username" class="username">
+<input type="text" name="password" class="password">
+<button class="regbtn">注册</button>
+<button class="loginbtn">登录</button>
+
+
+<div>
+    <ul class="show"></ul>
+    <!--<textarea name="" id="show" cols="80" rows="40"></textarea>-->
+    <div>
+        <input type="text" class="sendmsg">
+        <button class="senbtn">公聊</button>
+        <input type="text" class="psendmsg">
+        私聊ID：<input type="text" class="from">to<input type="text" class="sid">
+        <button class="psendbtn">私聊</button>
+    </div>
+    <div style="width: 500px;height: auto;">
+        <p>在线用户:</p>
+        <ul class="onlineuser"></ul>
+    </div>
+</div>
+<script>
+
+
+    $(function () {
+        let sock=io.connect('ws://localhost:8080');
+        let cur_username="";
+        let socks_obj;
+        sock.on('reg_ret',function(code,msg){
+            alert(msg);
+        })
+        $('.regbtn').on("click",function(){
+            var user=$('.username').val();
+            var pwd=$('.password').val();
+            sock.emit('reg',user,pwd);
+
+        })
+
+
+        sock.on('login_ret',function(code,msg){
+            if(code){
+                alert(msg)
+                cur_username=$('.username').val();
+                //socks_obj=obj;
+                // for(var s in obj){
+                //     $('.onlineuser').append(`<li sid=${obj[s]}>${s}</li>`);
+                // }
+            }else{
+                //登录失败
+                alert(msg);
+            }
+
+        })
+
+        sock.on("userlist",function(code,userlist){
+            $('.onlineuser').empty();
+            for(var i=0;i<userlist.length;i++){
+                $('.onlineuser').append(`<li sid=${userlist[i]}>${userlist[i]}</li>`);
+            }
+        })
+
+
+        $('.loginbtn').on("click",function(){
+            var user=$('.username').val();
+            var pwd=$('.password').val();
+            sock.emit('login',user,pwd);
+
+        })
+        sock.on("sendmsg_ret",function(code,msg){
+            if(!code){
+                alert(msg);
+            }else{
+                alert(msg);
+                //发送成功
+                var user=$('.username').val();
+                var txt=$('.sendmsg').val();
+                $('.show').append(`<li class="mine">用户${user}:${txt}</li>`);
+            }
+        })
+        sock.on("sendmsg",(username,txt)=>{
+            $('.show').append(`<li>用户${username}:${txt}</li>`);
+        });
+
+        //接收私聊信息
+        sock.on("put_private_msg",msg=>{
+            alert('收到一条私聊信息'+msg);
+        });
+
+        $('.senbtn').on("click",function(){
+            var txt=$('.sendmsg').val();
+            sock.emit('sendmsg',txt);
+        })
+
+
+        $('.onlineuser').on("click",'li',function(){
+            //$(this).attr('sid'));
+            $('.sid').attr('value',$(this).attr('sid'));
+        })
+
+        $('.psendbtn').on("click",function(){
+            var to=$('.sid').val();
+            var from=$('.from').val();
+            console.log(from);
+            sock.emit("private_message",from,to);
+        })
+    })
+</script>
+</body>
+</html>

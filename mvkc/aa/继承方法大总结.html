@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		#box {
+			width: 200px;
+			height: 200px;
+			border: 1px solid black;
+			position: absolute;
+		}
+	</style>
+
+	<body>
+		<div id="box"></div>
+		<script type="text/javascript">
+			//知识点:
+			//prototype:是每个函数都拥有的属性
+			//当new aaa()的时候,系统会自动加上obj1.prototype.constructor=aaa,将构造函数指向当前
+			//当obj1.prototype={name:123,age:222},就不知不觉的把prototype的指向给换成了{},那么当前的constructor不在指向aaa,而是Object,
+			//所以当出现这种被修改的情况的时候，需要手动修正constructor的指向
+			//constructor:是在每个函数的prototype下的属性
+
+			//*************************继承1*****************************
+			//			function aaa(name,age,color,index){
+			//				this.name=name;
+			//				this.age=age;
+			//				this.color=color;
+			//				this.index=index;
+			//			}
+			//			function bbb(name,age,color,job){
+			//				aaa.apply(this,arguments);
+			//				this.job=job;
+			//			}
+			//			
+			//			var obj1=new aaa("zhang123",22);
+			//			var obj2=new bbb("lisi123",33,"black","程序员");
+			//			alert(obj2.color);
+			//***********************继承1*******************************
+
+			//*************************继承2************************
+			//直接将实例对象赋值给另外一个函数的prototype，虽然实现了继承，但是确违背了OO的思想，当修改实例的属性的时候，会影响到
+			//另外的实例，所以这个方案，不能使用
+			//			function aaa(name,age){
+			//				
+			//				this.name=name;
+			//				this.age=age;
+			//			}
+			//			function bbb(color){
+			//				
+			//				this.color=color
+			//			}
+
+			//			bbb.prototype=new aaa("zhang123",55);
+			//			var obj1=new bbb();
+			//			alert(obj1.name);
+			//********************************************************
+			//****************************继承3******************
+
+			//缺点：prototype上的公共方法会互相影响，
+			//			function aaa(){
+			//				this.name="zhnang123";
+			//			}
+			//			aaa.prototype.showname=function(){
+			//				alert(this.name);
+			//			}
+			//			function bbb(){
+			//				aaa.call(this);
+			//			}
+			//			
+			//			bbb.prototype=aaa.prototype;
+			//			bbb.prototype.showage=function(){
+			//				alert(666);
+			//			}
+			//			var obj1=new bbb();
+			//			obj1.showage();
+			//			var obj2=new aaa();
+			//			obj2.showage();
+
+			//*************************************************
+			//****************************继承4***************************************
+
+			//			function aaa(name,age){
+			//				this.name="111";
+			//				this.age=22;
+			//			}
+			//			
+			//			function bbb(name,age){
+			//				
+			//			}
+			//			var f=function(){};
+			//			f.prototype=aaa.prototype;
+			//			bbb.prototype=new f();
+			//			bbb.prototype.constructor=bbb;
+			//			
+			//			var obj1=new bbb();
+			//			console.dir(obj1.name);
+			//***********************************************************************
+
+			//*********************************用继承实现的拖拽******************************
+
+			//*********************************拷贝继承(浅)*************************************
+			var obj1 = {
+				"username": "zhang123",
+				"age": 22
+			};
+			var obj2 = {
+				"job": "程序员"
+			};
+			var obj3 = [{
+				"sex": "男"
+			}, {
+				"money": 9999
+			}]
+			//			for(var attr in obj3){
+			//				obj2[attr]=obj3[attr];
+			//			}
+			//			console.log(obj2);
+			//*********************************拷贝继承(深)*************************************
+			function deepCopy(p, c) {　　　　
+				var c = c || {};　　　　
+				for(var i in p) {　　　　　　
+					if(typeof p[i] === 'object') {　　　　　　　　
+						c[i] = (p[i].constructor === Array) ? [] : {};　　　　　　　　
+						deepCopy(p[i], c[i]);
+					} else {
+						c[i] = p[i];　　　　　　
+					}　　　　
+				}　　　　
+				return c;　　
+			}
+			console.log(deepCopy(obj2, obj3));
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>农委年会</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"">
+	<meta name="description" content="优农市集" />
+	<link rel="stylesheet" type="text/css" href="css/weui.min.css">
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="Carousel.js"></script>
+    <!-- <script type="text/javascript" src="../js/api.js"></script> -->
+</head>
+<style>
+	#chou{position:fixed;bottom:10px;right:10px;margin:auto;cursor:pointer;opacity:0;}
+    #rwm{position:fixed;bottom:10px;left:10px;margin:auto;cursor:pointer;opacity:0;}
+	#chou:hover,#rwm:hover{opacity:1;}
+	.company_name{width:100%;height:100px;background:green;color:white;font-weight:bold;font-size:50px;position:absolute;margin:auto;line-height:100px;bottom:60px;overflow: hidden;}
+    .ul_list{
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top:0;
+    }
+</style>
+<body style='background:url(img/bc.jpg);background-size:cover;'>
+    
+    <img alt="" src="img/expression.png"  id='chou' style='width:100px;height:100px;' />  
+    <img alt="" src="img/rwm.png"  id='rwm' style='width:100px;height:100px;' />  
+    <div class="weui_dialog_alert" id="dialog2" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog" style='width:60%;'>
+            <div class="weui_dialog_bd" style='padding:0px;position:relative;'>
+                 <img alt="" src="img/logo.jpg" style='width:100%;height:100%;'  /> 
+                <div class='company_name'>
+                    <ul class="ul_list">
+                        
+                    </ul>
+                </div>                   
+            </div>
+            <div class="weui_dialog_ft" style='margin-top:0px'>
+                <a href="javascript:;" class="weui_btn_dialog default close">关闭</a>
+                <a href="javascript:;" class="weui_btn_dialog primary">抽取</a>
+            </div>
+        </div>
+    </div>
+     <div class="weui_dialog_alert" id="dialog1" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">优农市集网站</strong></div>
+            <div class="weui_dialog_bd">
+                <img alt="" src="img/rwm.png" style='width:400px;height:400px;' />              
+            </div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary close">关闭</a>
+            </div>
+        </div>
+    </div>
+    <script>
+ 
+  
+    $(function(){
+        
+    })
+
+  var shops = ['天天鲜1','天天鲜2','天天鲜3','天天鲜4','天天鲜5']
+    var length = shops.length - 1;
+    var alltime = 40;
+    var time = 0 ;
+    var currtop=0;// 当前top的位置
+    var yidongweizhi=20;//每次移动10px
+    /**
+    * 速度变慢 两种方式
+    * 1 在使用setInterval 的时候 每次执行的时间间隔不变的情况下只能是 调整移动的大小 
+    *   把单位时间内移动的位置变小
+    * 2 可以使用setTimeout 设置时间间隔大
+    */
+
+
+    $(function(){
+        $('.background').css({'width':window.screen.availWidth,'height':document.documentElement.clientHeight+10})
+        $('#chou').click(function(){
+            $('#dialog2').show();
+        })
+
+        $('.close').click(function(){
+            clearInterval(timer);
+            
+            $('#dialog2,#dialog1').hide();
+        })
+
+
+        $('#rwm').click(function(){
+            $('#dialog1').show();
+        })
+
+        function addList(){
+            $('.ul_list').css({'top':0});
+            for(var i=0;i<shops.length;i++){
+            var $li='<li>' + shops[i] +'</li>';
+            $('.ul_list').append($li);
+            }
+            var $ch=$('.ul_list').children();
+
+            $('.ul_list').append($ch.first().clone());
+             
+            $('.ul_list').css({
+             'top':0,
+             'left': 0 
+             });
+
+        }
+
+        addList();
+
+        var timer=null;
+        var time_speed=20;
+        var f=false;
+        var item_width = $('.ul_list').children().height();
+
+        $('.primary').click(function(){
+            // $('.ul_list').tab();
+            if(f){
+                currtop=parseInt(Math.random()*11)*-100;
+                // console.log(currtop);
+                $('.ul_list').css({'top':currtop});
+                yidongweizhi=20;
+                currtop=0;
+                clearInterval(timer);
+                f=!f;
+            } else{
+                // index=0;
+                item_width = $('.ul_list').children().height();
+                timer=setInterval(goup,time_speed);
+                f=true;
+                
+            }
+           
+        })
+
+       
+        // function  goup(a,b){
+        //     var ul_listheight = $('.ul_list').height();
+        //     currtop -= yidongweizhi;
+        //     yidongweizhi-=0.1;
+        //     $('.ul_list').css({'top':currtop});
+        //     if(currtop < 0-ul_listheight){
+        //         currtop  = 0;
+        //     }
+        //     console.log(yidongweizhi);
+        //     if(yidongweizhi < 1.5){
+        //         clearInterval(timer);
+        //     }
+
+        // }
+
+    })
+  
+  
+    </script>
+</body>
+</html>

@@ -11,3 +11,8 @@ var html=document.getElementsByTagName('html')[0];
 var pageWidth=html.getBoundingClientRect().width;
 //屏幕宽度/固定数值(这个值随意，但是最好是整数)=基准值
 html.style.fontSize=pageWidth/16+'px';
+
+
+
+
+//var json={'name':123,'list':array('id'=>'1',)};

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--js中的数据类型-->
+<!--基本数据类型:数字(Number)、字符串(String)、布尔(Boolean)、null、undefined、-->
+<!--引用数据类型:对象数据类型(Object) 、函数数据类型(Function)-->
+
+
+<!--Number:正数、负数、小数、0、NaN-->
+<!--Number("xx"):将其他数据类型强制转换为Number类型，但是转换的数据必须是纯数字，否则就是NaN-->
+<!--parseInt('xxx'):从左到右找，数字必须在最左边，否则就是NaN-->
+<!--isNaN():用的就是Number这个转换机制-->
+<!--例如:console.log(isNaN('123'))=>浏览器会默认把字符串先转化为Number类型，然后在进行判断-->
+
+<!--console.log(!3)  先把3转换为布偶类型，然后在取反-->
+<!--只有 0 NaN undefined  "" null 这五个为假，其余都为真-->
+
+<!--createTextRange-->
+<!--如果是两个值比较是否相等，遵循以下规则:-->
+<!--![]=>false-->
+<!--[]==[]=>false 对象和对象永远不相等  函数和函数也永远不相等-->
+<!--对象==字符串  先将对象转换为字符串(toString())，然后进行比较-->
+<!--例如:[].toString()=>"" , {}.toString()=>[Ojbect object]-->
+<!--对象==布尔类型 先将对象转换为字符串(toString())，然后在转换为数字(Number,""变成0),布尔类型也转换为数字(true=>1,false=>0)-->
+<!--然后在进行比较.-->
+<!--例如:[]==false-->
+<!--对象==数字 先将对象转换为字符串，然后转换为数字 然后进行比较-->
+<!--数字==布尔 布尔转换为数字，然后进行比较-->
+<!--数字==字符串 ....-->
+<!--字符串==布尔 ....-->
+<!--NaN==undefined =>true   null或者undefined和其他任何类型数据比较都不相等-->
+
+
+<!--删除属性名和属性值-->
+<!--obj.age=null;假删除-->
+<!--delete obj.age 真删除-->
+
+<!--对象数据类型可以细分为以下:-->
+<!--对象类(Object) 数组类(Array) 正则类(RegExp) 时间类(Date)  Math(数学函数)-->
+
+</body>
+</html>

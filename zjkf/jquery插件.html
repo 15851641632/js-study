@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/jquery.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #wrap {
+            position: relative;
+        }
+
+        #wrap input[type='button'] {
+            float: left;
+            list-style: none;
+            width: 50px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .content {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            display: none;
+            /*margin-top: 30px;*/
+            position: absolute;
+            top: 30px;
+        }
+
+        .focus {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <!--<input type="button" class="focus" value="1"/>-->
+    <!--<input type="button" value="2"/>-->
+    <!--<input type="button" value="3"/>-->
+    <!--<div class="content" style="display: block;">1111</div>-->
+    <!--<div class="content">2222</div>-->
+    <!--<div class="content">3333</div>-->
+</div>
+<script>
+    $(function () {
+//        tab切换插件
+        $('#wrap').tab({
+            heads: [1, 2, 3, 5, 6],
+            content: ['面板1', '面板2', '面板3', '3333', '11211212'],
+            events: 'mouseover'
+        });
+    });
+
+    (function ($) {
+        var settings = {};
+        var $parent = null;
+        var index = 0;
+        var defaults = {
+            heads: [1, 2, 3],
+            content: ['面板1', '面板2', '面板3'],
+            events: 'click'
+        }
+
+        function plugin_tab(options) {
+            $parent = this;
+            console.log($parent);
+            //合并参数到settings中
+            settings = $.extend(settings, defaults, options);
+            create_ui();
+            bind();
+        }
+
+        function create_ui() {
+            for (var i = 0; i < settings.heads.length; i++) {
+                var $btns = $('<input type="button" value=" ' + settings.heads[i] + ' ">');
+                if (i == 0) {
+                    $btns.attr('class', 'focus');
+                }
+                $parent.append($btns);
+            }
+            for (var i = 0; i < settings.content.length; i++) {
+                var $contents = $('<div>' + settings.content[i] + '</div>')
+                $contents.attr('class', 'content');
+                if (i == 0) {
+                    $contents.css('display', 'block');
+                }
+                $parent.append($contents);
+            }
+        }
+
+        function bind() {
+            //绑定事件
+            $parent.on(settings.events, 'input', function () {
+                $(this).attr('class', 'focus').siblings('input').attr('class', '');
+                $parent.find('div').eq($(this).index()).css('display', 'block').siblings('div').css('display', 'none');
+            })
+        }
+
+        $.fn.extend({
+            tab: plugin_tab
+        })
+    })(jQuery)
+
+
+</script>
+</body>
+</html>

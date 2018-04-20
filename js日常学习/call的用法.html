@@ -10,9 +10,9 @@
         console.log(this);
     }
     //这三者是等价的,都是找到Function基类原型中的call方法
-    //    console.log(fn.call);
-    //    console.log(fn.__proto__.call);
-    //    console.log(Function.prototype.call);
+    //console.log(fn.call);
+    //console.log(fn.__proto__.call);
+    //console.log(Function.prototype.call);
     var obj = {name: 'zzz'};
     //fn.call(obj);//改变fn里面的this指向
     //首先fn通过__proto__找到Function.prototype上的call方法

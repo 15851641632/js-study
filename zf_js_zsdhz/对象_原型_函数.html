@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 对象的__proto__(隐式原型)都指向构造该方法的构造函数的原型
+     * 例如:
+     * var obj={};
+     * 应为:构造{}对象的是Object
+     * 所以:console.log(obj.__proto__===window.Object.prototype)=>true
+     */
+
+    /**
+     * console.dir(obj.toString());//123 string类型
+     * 那么toString是怎么获取obj的内容的呢??
+     * 1、obj.toString() 等价于 obj.toString.call(obj) 等价于 window.Object.prototype.toString.call(obj)
+     * 这样就相当于把obj当做参数传递给了toString
+     */
+
+    function person(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    function student(){
+
+    }
+    //console.log(person.prototype.__proto__===Object.prototype);
+    //console.log(person.prototype.__proto__===student.prototype.__proto__);//true
+
+    var obj1={name:'zhang123'};
+    var obj2={name:'lisi666'};
+
+    console.log(obj1.__proto__===obj2.__proto__);
+    console.log(obj2.__proto__);
+
+    // person.prototype.getname=function(){
+    //     console.log(this.name);
+    // }
+    //
+    // function student(name,age,job){
+    //     person.call(this,name,age);
+    //     this.job=job;
+    // }
+    //
+    // var f=function(){};
+    // f.prototype=person.prototype;
+    //
+    // student.prototype=new f();
+    //
+    // var obj=new student('666',22,'程序员');
+
+
+</script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script type="text/javascript" src="../js/jquery.js"></script>
     <title>地方大幅度发</title>
     <style>
         *{
@@ -12,6 +13,11 @@
             /*float: left;*/
             border: 1px solid black;
             margin: 10px;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
         }
     </style>
 </head>
@@ -28,6 +34,10 @@
     <li>9</li>
     <li>10</li>
 </ul>
+
+<textarea class="box"></textarea>
+<input type="button" class="btn" value="点击" name="">
+<script src="./aaa.js"></script>
 <script>
     /*
      2016-11-11,晚8：:30，若愚老师对于原型链和对象的讲解
@@ -41,28 +51,37 @@
      可以通过打印(s1.__proto__===student.prototype)来验证
 
      */
-    function Student(name, age) {
-        this.name = name;
-        this.age = age;
+//  function Student(name, age) {
+//      this.name = name;
+//      this.age = age;
+//
+//  }
+//  /*
+//   将方法定义到原型上，用对象去访问，首先搜索自身是否有这个方法(如果找到就终止搜索)，没找到的话，就继续往函数的原型上搜索，还是没有的话，就
+//   找到函数原型的原型上，就是Object上，还是找不到就输出undefined
+//   */
+//  Student.prototype.sayname = function () {
+//      console.log(this.name);
+//  }
+//  var s1 = new Student('zhang', 22);
+//  //s1.sayname();
+//
+//  var str='就看见看见看见的';
+//  var arr=[3,2,5,2,1,5,7];
+//  var d=str.split('').join('=');
+    //console.log(d);
 
-    }
-    /*
-     将方法定义到原型上，用对象去访问，首先搜索自身是否有这个方法(如果找到就终止搜索)，没找到的话，就继续往函数的原型上搜索，还是没有的话，就
-     找到函数原型的原型上，就是Object上，还是找不到就输出undefined
-     */
-    Student.prototype.sayname = function () {
-        console.log(this.name);
-    }
-    var s1 = new Student('zhang', 22);
-    s1.sayname();
+    
 
-    var str='就看见看见看见的';
-    var arr=[3,2,5,2,1,5,7];
-    var d=str.split('').join('=');
-    console.log(d);
+// var reg = /\[.+?\]/g;
+// var c=$('.answer_content').each(function(){
+// var reg=$(this).html().replace(reg,'<img src="/cake/app/webroot/img/qqface/$1" border="0" />');
+// console.log(reg);
+// $('.answer_content').html(reg);
+// })
 
 
-
+$api.getsex();
 </script>
 </body>
 </html>

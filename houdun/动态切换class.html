@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+    <style>
+        .hd1 {
+            color: red;
+        }
+
+        .hd2 {
+            color: green;
+        }
+    </style>
+</head>
+<div id="box">
+    <h1 :class="'hd'+n">8888</h1>
+    <input type="text" v-model="n">
+    <input type="radio" v-model="n" value="1">红
+    <input type="radio" v-model="n" value="2">绿
+</div>
+
+<body>
+<script>
+    var app=new Vue({
+        el:'#box',
+        data:{
+            n:1
+        }
+    })
+</script>
+
+</body>
+</html>

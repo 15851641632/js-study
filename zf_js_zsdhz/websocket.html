@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery.js"></script>
+    <script src="http://localhost:8080/socket.io/socket.io.js" charset="UTF-8"></script>
+</head>
+<body>
+<!--npm install socket.io-->
+<ul id="otool"></ul>
+<script>
+    var sock=io.connect("ws://localhost:8080");
+    document.onclick=function () {
+        sock.emit('aaa',12,5);
+    }
+    //接收服务器推送消息
+    sock.on("tohtml",function (str) {
+        var li="<li>"+str+"</li>";
+        $('#otool').append(li);
+    })
+    sock.on("msg",function (str) {
+        console.log(str);
+    })
+</script>
+</body>
+</html>

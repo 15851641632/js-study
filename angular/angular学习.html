@@ -1,46 +1,95 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="myApp">
 <head>
     <meta charset="utf-8">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script type="text/javascript">
+        function Aaa($scope){
+            $scope.name='hello';
+        }
+    </script>
 </head>
 <!--ng-init用来声明属性,将属性声明在当前作用域下，应为当前只有一个作用域，所以声明到了$rootScope-->
-<body ng-init="name={age:22}">
-<script>
-    //console.log(angular);
-    //ng-app属性，就是告诉angular哪里范围归angular管理,在一个项目中只能指定一次ng-app
-    //ng-model是实现双向数据绑定的,只能放在视图可修改的地方(数据改变<->视图改变)
-    //在ng-model上声明的属性,会在当前作用域下查找，如果找不到就声明一个
-    //ng-bind和{{}}是一样的，都是用来绑定数据,ng-bind可以解决闪烁问题(刷新时候会瞬间看到{{}}的原始形态，未解析的时候的样子)
-    //ng-bind是类似于.html这种形式，插入数据的时候，会把原来的数据全部给覆盖掉，{{}}这种形式就不会覆盖，会在原始数据后面接着
-    //想原样进行输出ng-no-bindable
-    //绑定多个模板:<div ng-bind-template="{{name}} {{age}}"></div>
-    //在angular.js中可以使用ng-cloak来解决闪烁问题,使用的时候先要让ng-cloak的display为none,等内部数据编译好后，在将其移除
-</script>
+<body>
+<!-- 
 <div >
-    <!--<p>名字 : <input type="text" ng-model="name.age"></p>-->
-    <!--<p>年龄 : <input type="text" ng-model="age"></p>-->
-    <!--<h1 ng-bind="name">44444</h1>-->
-    <!--<br/>-->
-    <!--<h1>2222222{{name?name:'hello zfpx'}}</h1>-->
-    <!--<div ng-non-bindable="">{{原样输出}}</div>-->
-    <!--<div ng-bind-template="{{name}} {{age}}"></div>-->
-
-    <!--声明类型：数组、数字、字符串、对象，不能声明函数-->
-    <!--<div ng-cloak ng-model="name">-->
-        <!--{{name}}-->
-        <!--{{age}}-->
-        <!--<div>-->
-            <!--{{age}}-->
-        <!--</div>-->
-    <!--</div>-->
+    <p>双向数据绑定  <input type="text" ng-model="data"></p>
+    <p>名字 : <input type="text" ng-model="name"></p>
+     <h1>Hello {{name}}</h1>
+     <h2>双向绑定{{data}}</h2>
 </div>
-<style>
-    [ng-cloak]{
-        display: none;
-    }
 
-</style>
-<script src="../glup/node_modules/angular/angular.min.js"></script>
+<div ng-init="firstName='John'">
 
+<p>姓名为 <span ng-bind="firstName"></span></p>
+
+</div> -->
+
+<!-- <div ng-app="myApp" ng-controller="myCtrl">
+    名:<input type="text" ng-model="fn">
+    姓:<input type="text" ng-model="ln">
+    姓名:{{fn+"   "+ln}}
+</div> -->
+<!-- <div ng-app="" ng-init="quantity=1;cost=5">
+ 
+<p>总价： {{ quantity * cost }}</p>
+ 
+</div> -->
+
+<!-- 类似json -->
+<!-- <div ng-app="" ng-init="person={firstname:'zhang123'}">
+    {{person.firstname}}
+</div> -->
+<!-- 类似数组 -->
+<!-- <div ng-app="" ng-init="person=[1,2,3]">
+    {{person[2]}}
+</div> -->
+<!-- 双向数据绑定 -->
+<!-- <div ng-app="" ng-init="firstname='zhang123'">
+    <input type="text" ng-model="firstname" name="">
+    输入的内容为<span>{{firstname}}</span>
+</div> -->
+<!-- angualr循环 -->
+<!-- <div ng-app="" ng-init="person=[1,2,3,4,5,6,7,8]">
+    <ul>
+        <li ng-repeat="x in person">{{x}}</li>
+    </ul>
+</div> -->
+
+<!-- <div ng-app="" ng-init="names=[
+{name:'Jani',country:'Norway'},
+{name:'Hege',country:'Sweden'},
+{name:'Kai',country:'Denmark'}]">
+    <ul>
+        <li ng-repeat="x in names">{{x.name}}</li>
+    </ul>
+</div> -->
+    
+
+<!-- 自定义指令 -->
+<!-- 需要在html或者body等全局范围申明ng-app="myApp" -->
+<script type="text/javascript">
+    var app = angular.module("myApp", []);
+    app.directive("runoobDirective", function() {
+        return {
+            template : "<h1>自定义指令!</h1>"
+        };
+    });
+</script>
+<!-- 调用方式1 -->
+<!-- <runoob-directive></runoob-directive> -->
+<!-- 调用方式2 -->
+<!-- <div runoob-directive></div> -->
+<!-- 调用方式3 不成功-->
+<!-- <div class="runoob-directive"></div> -->
+
+
+<!-- <script type="text/javascript">
+    var app=angular.module('myApp',[]);
+    app.controller('myCtrl',function($scope){
+        $scope.fn="john";
+        $scope.ln='min';
+    })
+</script> -->
 </body>
 </html>

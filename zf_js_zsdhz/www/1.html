@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js"></script>
+    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+</head>
+<body>
+<input type="text" name="username" class="username">
+<input type="text" name="password" class="password">
+<button class="regbtn">注册</button>
+<button class="loginbtn">登录</button>
+<script>
+    $(function () {
+    //     $('.regbtn').on("click", function () {
+    //         $.ajax({
+    //             url: '/reg',
+    //             data: {
+    //                 "user": $('.username').val(),
+    //                 "pwd": $('.password').val()
+    //             },
+    //             dataType: 'JSON',
+    //             success: function (res) {
+    //                 console.log(res);
+    //                 if (res.code == 0) {
+    //                     alert(res.msg);
+    //                 } else {
+    //                     alert('注册成功');
+    //                 }
+    //             },
+    //             error: function (error) {
+    //                 alert('通信错误');
+    //             }
+    //
+    //         })
+    //     })
+    //
+    //     $('.loginbtn').on("click", function () {
+    //         $.ajax({
+    //             url: '/login',
+    //             data: {
+    //                 "user": $('.username').val(),
+    //                 "pwd": $('.password').val()
+    //             },
+    //             dataType: 'JSON',
+    //             success: function (res) {
+    //                 console.log(res);
+    //                 if (res.code == 0) {
+    //                     alert(res.msg);
+    //                 } else {
+    //                     alert('登录成功');
+    //                 }
+    //             },
+    //             error: function (error) {
+    //                 alert('通信错误');
+    //             }
+    //
+    //         })
+    //     })
+    })
+</script>
+</body>
+</html>

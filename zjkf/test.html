@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="Carousel/js/jquery.min.js"></script>
+	<script type="text/javascript" src="Carousel/test.js"></script>
+</head>
+<style type="text/css">
+	#drag{
+		width: 200px;height: 200px;
+		background-color: red;
+		position: absolute;
+	}
+</style>
+<body>
+<div id="tab">
+	<a href="">触发</a>
+	<a href="">触发</a>
+	<a href="">触发</a>
+	<a href="">触发</a>
+</div>
+<div id="drag">
+</div>
+<script type="text/javascript">
+// $(function(){
+// 	$('#tab').tab({
+// 	events: 'mouseover',
+// 	});
+// })
+window.onload=function(){
+	var dragObj = document.getElementById("drag");
+        dragObj.style.left = "0px";
+        dragObj.style.top = "0px";
+
+        var mouseX, mouseY, objX, objY;
+        var dragging = false;
+
+        dragObj.onmousedown = function (event) {
+            event = event || window.event;
+
+            dragging = true;
+            dragObj.style.position = "relative";
+
+
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+            objX = parseInt(dragObj.style.left);
+            objY = parseInt(dragObj.style.top);
+            console.log(objX);
+        }
+
+        document.onmousemove = function (event) {
+            event = event || window.event;
+            if (dragging) {
+
+                dragObj.style.left = parseInt(event.clientX - mouseX + objX) + "px";
+                dragObj.style.top = parseInt(event.clientY - mouseY + objY) + "px";
+            }
+
+        }
+
+        document.onmouseup = function () {
+            dragging = false;
+        }
+}
+</script>
+</body>
+</html>
