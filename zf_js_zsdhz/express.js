@@ -13,9 +13,9 @@ server.listen(8080);
 // /**
 //  * resful
 //  */
-// server.use('/upload',function(req,res){
-//     console.log('express的get请求');
-// })
-// server.use('中间件')
+server.use('/upload',function(req,res){
+    //console.log('express的get请求');
+    res.sendStatus(403);
+})
 
-server.use(express.static('./'));
+//server.use(express.static('./'));
